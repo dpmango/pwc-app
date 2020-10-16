@@ -1,12 +1,15 @@
 <template>
   <div class="Root">
-    <StandartTemplate>12312312</StandartTemplate>
-    <router-view></router-view>
+    <StandartTemplate>
+      <router-view />
+    </StandartTemplate>
   </div>
 </template>
+
 <script>
 export default {}
 </script>
+
 <style lang="scss">
 html,
 body {

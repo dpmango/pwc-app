@@ -3,9 +3,12 @@ import App from './App'
 import router from '@/router'
 import store from '@/store'
 import '@/http'
-import StandartTemplate from './components/templates/StandartTemplate'
 
-Vue.component('StandartTemplate', StandartTemplate)
+import * as components from '@/components'
+
+for (const name in components) {
+  Vue.component(name, components[name])
+}
 
 new Vue({
   store,

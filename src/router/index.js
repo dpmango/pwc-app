@@ -4,7 +4,13 @@ import Vuex from 'vuex'
 
 Vue.use(VueRouter)
 
-const routes = []
+const routes = [
+  {
+    path: '/',
+    name: 'Feed',
+    component: () => import('@/pages/Feed.vue'),
+  },
+]
 
 const router = new VueRouter({
   mode: 'history',

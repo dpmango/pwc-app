@@ -5,12 +5,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'StandartTemplate',
+}
 </script>
 
 <style lang="scss" scoped>
 .StandartTemplate {
   width: 100%;
-  max-height: 100%;
 }
 </style>
