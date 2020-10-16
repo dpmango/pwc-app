@@ -40,7 +40,7 @@ deploy_stage:
     <<: *base_deploy
     environment:
         name: stage
-        url: http://ft-pwc-frontend.dline-rhost.ru
+        url: https://ft-pwc-frontend.dline-rhost.ru
     only:
         refs:
         - dev
