@@ -13,5 +13,5 @@ for (const name in components) {
 new Vue({
   store,
   router,
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount('#app')

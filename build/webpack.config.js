@@ -76,6 +76,11 @@ module.exports = {
           },
         ],
       },
+
+      {
+        test: /\.svg$/,
+        use: ['vue-loader', 'vue-svg-loader'],
+      },
     ],
   },
   resolve: {
