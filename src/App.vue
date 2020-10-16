@@ -11,13 +11,7 @@ export default {}
 </script>
 
 <style lang="scss">
-html,
-body {
-  height: 100%;
-  background-color: #c9c9c9;
-}
-.Root {
-  width: 100%;
-  height: 100%;
-}
+@import 'normalize-scss';
+@include normalize();
+@import '@/theme/app.scss';
 </style>

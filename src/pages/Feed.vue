@@ -1,23 +1,11 @@
 <template>
-  <div class="head">
-    <Logo />
-    <h1>test</h1>
-  </div>
+  <Head />
 </template>
 
 <script>
-import Logo from '@/img/logo.svg'
-
-console.log(Logo)
 export default {
   name: 'Feed',
-  components: {
-    Logo,
-  },
 }
 </script>
 
-<style lang="scss">
-.head {
-}
-</style>
+<style lang="scss"></style>

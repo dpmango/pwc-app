@@ -1,7 +1,10 @@
 <template>
-  <section class="StandartTemplate">
-    <slot />
-  </section>
+  <div class="page">
+    <div class="page__content">
+      <slot />
+    </div>
+    <Navigation />
+  </div>
 </template>
 
 <script>
@@ -11,7 +14,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.StandartTemplate {
+.page {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  // TODO - change to 480px
+  max-width: 375px;
+  background: white;
+  margin: 0 auto;
+  &__content {
+    flex: 1 0 auto;
+  }
 }
 </style>
