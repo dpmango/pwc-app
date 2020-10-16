@@ -15,6 +15,7 @@ export default {
 
 <style lang="scss" scoped>
 .page {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -24,6 +25,7 @@ export default {
   background: white;
   margin: 0 auto;
   &__content {
+    padding-bottom: 68px;
     flex: 1 0 auto;
   }
 }

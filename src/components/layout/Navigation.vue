@@ -55,7 +55,10 @@ export default {
 @import '@/theme/utils.scss';
 
 .navigation {
-  flex: 0 0 auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 10px 0;
   &__grid {
     display: flex;

@@ -1,6 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -78,6 +78,10 @@ module.exports = {
         ],
       },
       {
+        test: /\.(png|woff|woff2|eot|ttf)$/,
+        loader: 'url-loader?limit=100000',
+      },
+      {
         test: /\.svg$/,
         exclude: path.resolve(__dirname, '../src/assets/icons'),
         use: ['vue-loader', 'vue-svg-loader'],
@@ -131,13 +135,13 @@ module.exports = {
       filename: './index.html',
       title: 'Feature Today',
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: `${path.join(__dirname, '../src')}/static/**/*`,
-    //       to: 'assets/static',
-    //     },
-    //   ],
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: `${path.join(__dirname, '../static')}`,
+          to: 'static',
+        },
+      ],
+    }),
   ],
 }

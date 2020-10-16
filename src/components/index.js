@@ -1,3 +1,5 @@
-export * from './templates'
-export * from './layout'
-export * from './ui'
+export * from './Templates'
+export * from './Layout'
+export * from './UI'
+
+export * from './Feed'

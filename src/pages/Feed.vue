@@ -1,5 +1,8 @@
 <template>
-  <Head />
+  <section>
+    <Head />
+    <FeedPopular />
+  </section>
 </template>
 
 <script>
