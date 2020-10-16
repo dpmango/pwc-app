@@ -46,6 +46,9 @@
     "prettier": "^1.19.1",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
+    "svg-sprite-loader": "^5.0.0",
+    "svgo": "^1.1.0",
+    "svgo-loader": "^2.1.0",
     "vue-loader": "^15.9.3",
     "vue-style-loader": "^4.1.2",
     "vue-svg-loader": "^0.17.0-beta.2",
@@ -59,12 +62,12 @@
     "> 1%",
     "last 3 version"
   ],
-  "license": "ISC",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
+  "license": "ISC",
   "lint-staged": {
     "*.(js|vue)": [
       "npm run lint:write",

@@ -1,3 +1,3 @@
-// import Head from './Head'
+import SvgIcon from './SvgIcon'
 
-// export { Head }
+export { SvgIcon }

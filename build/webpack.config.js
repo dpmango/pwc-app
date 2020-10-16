@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+// const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 
 module.exports = {
   entry: {
@@ -76,10 +77,37 @@ module.exports = {
           },
         ],
       },
-
       {
         test: /\.svg$/,
+        exclude: path.resolve(__dirname, '../src/assets/icons'),
         use: ['vue-loader', 'vue-svg-loader'],
+      },
+      {
+        test: /\.svg$/,
+        include: [path.resolve(__dirname, '../src/assets/icons')],
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              // extract: true,
+            },
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                { removeTitle: true },
+                // { convertColors: { shorthex: false } },
+                { convertPathData: true },
+                {
+                  removeAttrs: {
+                    attrs: 'stroke|fill',
+                  },
+                },
+              ],
+            },
+          },
+        ],
       },
     ],
   },
