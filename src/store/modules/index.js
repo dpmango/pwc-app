@@ -10,7 +10,7 @@ const requireModule = require.context(
 
 const modules = {}
 
-requireModule.keys().forEach((fileName) => {
+requireModule.keys().forEach(fileName => {
   if (/\.unit\.js$/.test(fileName)) return
 
   modules[camelCase(fileName.split('/')[1].replace(/(\.\/|\.js)/g, ''))] = {
