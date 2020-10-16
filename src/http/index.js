@@ -17,7 +17,7 @@ const removeToken = () => {
 }
 
 http.interceptors.response.use(
-  (config) => {
+  config => {
     const { method, token } = config.data
 
     if (method === 'login') {
@@ -31,7 +31,7 @@ http.interceptors.response.use(
     }
     return Promise.resolve(config)
   },
-  (error) => {
+  error => {
     const { status } = error.response
     const { token } = store.state.auth
 

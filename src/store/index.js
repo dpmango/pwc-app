@@ -19,7 +19,7 @@ const store = new Vuex.Store({
       state.alerts.push(alert)
     },
     removeAlert(state, alertId) {
-      state.alerts = state.alerts.filter((alert) => alert.id !== alertId)
+      state.alerts = state.alerts.filter(alert => alert.id !== alertId)
     },
   },
   modules,
