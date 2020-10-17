@@ -13,6 +13,11 @@ const routes = [
     component: () => import('@/pages/Feed.vue'),
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/pages/Profile.vue'),
+  },
+  {
     path: '/articles',
     name: 'Articles',
     component: () => import('@/pages/Articles.vue'),
