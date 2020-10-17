@@ -2,7 +2,7 @@
   <div class="navigation">
     <div class="navigation__grid">
       <div class="navigation__col">
-        <router-link to="/" class="nav-link">
+        <router-link to="/feed" class="nav-link">
           <div class="nav-link__icon">
             <SvgIcon name="home" />
           </div>

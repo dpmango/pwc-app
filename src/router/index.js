@@ -5,8 +5,10 @@ import Vuex from 'vuex'
 Vue.use(VueRouter)
 
 const routes = [
+  { path: '/', redirect: '/feed' },
   {
-    path: '/',
+    path: '/feed',
+    alias: '/',
     name: 'Feed',
     component: () => import('@/pages/Feed.vue'),
   },
