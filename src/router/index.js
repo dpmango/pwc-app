@@ -10,6 +10,11 @@ const routes = [
     name: 'Feed',
     component: () => import('@/pages/Feed.vue'),
   },
+  {
+    path: '/articles',
+    name: 'Articles',
+    component: () => import('@/pages/Articles.vue'),
+  },
 ]
 
 const router = new VueRouter({
