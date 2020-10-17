@@ -33,8 +33,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/theme/utils.scss';
-
 .p-points {
   margin-top: 16px;
   &__container {

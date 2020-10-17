@@ -56,7 +56,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.(css|scss|sass)$/,
         use: [
           'style-loader',
           MiniCssExtractPlugin.loader,
@@ -73,7 +73,10 @@ module.exports = {
           },
           {
             loader: 'sass-loader',
-            options: { sourceMap: true },
+            options: {
+              sourceMap: true,
+              additionalData: `@import "@/theme/utils.scss";`,
+            },
           },
         ],
       },

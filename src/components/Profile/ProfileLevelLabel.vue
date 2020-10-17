@@ -20,8 +20,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/theme/utils.scss';
-
 .pl-label {
   min-width: 106px;
   display: inline-flex;
@@ -29,6 +27,8 @@ export default {
   text-align: center;
   justify-content: center;
   padding: 6px;
+  color: white;
+  background: rgba($colorGrayLight, 0.87);
   span {
     font-family: Avenir;
     font-size: 12px;
@@ -40,7 +40,6 @@ export default {
     margin-left: 6px;
   }
   &.active {
-    color: white;
     background-color: $colorRed;
   }
   // &.verified {

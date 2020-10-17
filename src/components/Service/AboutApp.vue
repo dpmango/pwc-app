@@ -15,8 +15,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/theme/utils.scss';
-
 .about-app {
   margin: 16px 0;
   &__cta-link {

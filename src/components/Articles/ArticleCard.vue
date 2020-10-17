@@ -49,8 +49,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/theme/utils.scss';
-
 .ac {
   padding-top: 24px;
   padding-bottom: 16px;

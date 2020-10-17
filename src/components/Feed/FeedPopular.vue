@@ -72,7 +72,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/theme/utils.scss';
 @import '@/theme/vendor/swiper.css';
 
 .f-popular {
