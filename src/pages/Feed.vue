@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import data from './articles'
+import data from './articlesData'
 
 export default {
   name: 'Feed',
