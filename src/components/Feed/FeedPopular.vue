@@ -3,8 +3,8 @@
     <div class="f-popular__head">
       <Container>
         <div class="f-popular__head-wrapper">
-          <div class="f-popular__title">Популярное</div>
-          <a href="#" class="f-popular__title-link">
+          <div class="f-popular__title">{{ title }}</div>
+          <a href="#" v-if="!hideMoreLink" class="f-popular__title-link">
             <span>Все</span>
             <SvgIcon name="arrow-right" />
           </a>
@@ -57,6 +57,13 @@ export default {
         freeModeSticky: true,
       },
     }
+  },
+  props: {
+    title: String,
+    hideMoreLink: {
+      type: Boolean,
+      default: false,
+    },
   },
   directives: {
     swiper: directive,

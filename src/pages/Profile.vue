@@ -1,7 +1,10 @@
 <template>
   <section>
     <Head />
-    <FeedPopular />
+    <ProfileUser />
+    <ProfilePoints />
+    <FeedPopular title="Получить больше баллов" hideMoreLink />
+    <AboutApp />
   </section>
 </template>
 

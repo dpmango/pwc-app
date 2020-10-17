@@ -1,7 +1,7 @@
 <template>
   <section>
     <Head />
-    <FeedPopular />
+    <FeedPopular title="Популярное" />
     <Container>
       <ArticleCard v-for="a in articles" :key="a.id" :data="a" />
     </Container>
