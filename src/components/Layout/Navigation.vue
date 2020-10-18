@@ -54,6 +54,7 @@ export default {
 <style lang="scss" scoped>
 .navigation {
   position: fixed;
+  z-index: 9;
   background: white;
   width: 100%;
   max-width: 375px;

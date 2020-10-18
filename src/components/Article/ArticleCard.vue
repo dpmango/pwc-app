@@ -7,7 +7,11 @@
       </div>
     </div>
     <div class="ac__image" v-if="data.image">
-      <img :src="data.image" :srcset="data.image2x" alt="" />
+      <img
+        :src="data.image"
+        :srcset="data.image2x ? `${data.image2x} 2x` : null"
+        alt=""
+      />
     </div>
     <div class="ac__metrics">
       <button class="ac__likes">
