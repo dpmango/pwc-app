@@ -14,9 +14,9 @@ const store = new Vuex.Store({
     },
     async noVkInit({ dispatch }) {
       dispatch('vk/getToken', {
-        vk_id: 202119180,
-        name: 'Сергей',
-        surname: 'Хмелевской',
+        vk_user_id: '202119180',
+        vk_are_notifications_enabled: '1',
+        sign: 'test_sign',
       })
     },
   },

@@ -63,7 +63,7 @@ export default {
     try {
       const {
         data: { access_token: token },
-      } = await this.$http.post('/profiles', payload)
+      } = await this.$http.patch('/profiles', payload)
 
       /* записываем токен в vk storage */
       await dispatch('saveToken', { key: 'accessToken', value: token })

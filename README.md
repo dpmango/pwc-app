@@ -9,3 +9,5 @@ https://ft-pwc-frontend.dline-rhost.ru
 https://vk.com/app7631008
 
 
+## Backend log
+https://ft-pwc-backend.dline-rhost.ru/telescope/requests

@@ -10,6 +10,8 @@ const http = Axios.create({
   },
 })
 
+// http.defaults.params['vk_user_id'] = '202119180'
+
 // const removeToken = () => {
 //   delete http.defaults.headers['Authorization']
 //   store.commit('auth/removeToken')
