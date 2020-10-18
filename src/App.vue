@@ -7,16 +7,15 @@
 </template>
 
 <script>
-// const getUtmFields = hash => {
-//   const fields = hash.substr(1, hash.length - 1).split('&')
+const getUtmFields = hash => {
+  const fields = hash.substr(1, hash.length - 1).split('&')
+  return fields.reduce((acc, field) => {
+    const splitField = field.split('=')
+    acc[splitField[0]] = splitField[1]
 
-//   return fields.reduce((acc, field) => {
-//     const splitField = field.split('=')
-//     acc[splitField[0]] = splitField[1]
-
-//     return acc
-//   }, {})
-// }
+    return acc
+  }, {})
+}
 
 export default {
   data() {
@@ -25,9 +24,10 @@ export default {
     }
   },
   async mounted() {
+    console.log('App mounted -w.loc', window.location)
+    this.$store.commit('vk/saveUtm', getUtmFields(window.location.search))
     await this.$store.dispatch('init')
     this.loading = false
-    // this.$store.commit('vk/saveUtm', getUtmFields(this.$route.hash))
   },
 }
 </script>

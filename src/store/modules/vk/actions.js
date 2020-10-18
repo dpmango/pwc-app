@@ -4,9 +4,7 @@ export default {
   async fetchProfile({ commit }) {
     /* получаем данные профиля вк */
     try {
-      console.log('getting profile - VKWebAppGetUserInfo')
       const profile = await bridge.send('VKWebAppGetUserInfo', {})
-      console.log('profile after await', profile)
 
       commit('setProfile', profile)
       return {
@@ -26,11 +24,14 @@ export default {
     /* проверям токен в vk storage */
     try {
       const utm = getters.utm
-      const {
-        id: vk_id,
-        first_name: name,
-        last_name: surname,
-      } = getters.profile
+
+      // Ставим параметры которые передаются приложением vk_
+      if (utm) {
+        this.$http.defaults.params = {}
+        Object.keys(utm).forEach(k => {
+          this.$http.defaults.params[k] = utm[k]
+        })
+      }
 
       let {
         keys: [token],
@@ -41,10 +42,10 @@ export default {
         commit('setToken', token.value)
         this.$http.defaults.headers.common['X-PROFILE-ACCESS-TOKEN'] =
           token.value
-        this.$router.push('/game')
+        // this.$router.push('/game')
       } else {
         /* если токена нет то получаем его через POST /profiles */
-        token = await dispatch('getToken', { vk_id, name, surname })
+        token = await dispatch('getToken')
       }
 
       if (utm) {
@@ -58,12 +59,14 @@ export default {
       console.error('Error vk/checkToken', err)
     }
   },
-  async getToken({ dispatch, commit }, payload) {
-    /* получем токен через /profiles передав id, first_name, last_name */
+  async getToken({ dispatch, commit }) {
+    console.log('get token')
+    // TODO - API не отдает токен
+    /* получем токен через /profiles, параметры беруться из axios.defaults */
     try {
       const {
         data: { access_token: token },
-      } = await this.$http.patch('/profiles', payload)
+      } = await this.$http.patch('/profiles')
 
       /* записываем токен в vk storage */
       await dispatch('saveToken', { key: 'accessToken', value: token })
@@ -136,7 +139,7 @@ export default {
         personalCard = { phone, email }
       }
     }
-    this.$router.push('/game')
+    // this.$router.push('/game')
     commit('setPersonalCard', personalCard)
 
     return {

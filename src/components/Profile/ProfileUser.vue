@@ -3,13 +3,12 @@
     <Container>
       <div class="p-user__wrapper">
         <div class="p-user__avatar">
-          <img
-            src="static/profileAvatar.jpg"
-            srcset="static/profileAvatar@2x.jpg 2x"
-          />
+          <img :src="profile.photo_100" :srcset="`${profile.photo_200} 2x`" />
         </div>
         <div class="p-user__content">
-          <div class="p-user__name">Валерия Иванова</div>
+          <div class="p-user__name">
+            {{ profile.first_name }} {{ profile.last_name }}
+          </div>
           <div class="p-user__level">
             <ProfileLevelLabel name="Associate" isActive isVerified />
           </div>
@@ -20,8 +19,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'ProfileUser',
+  computed: {
+    // mix the getters into computed with object spread operator
+    ...mapGetters('vk', ['profile']),
+  },
 }
 </script>
 
@@ -40,6 +45,7 @@ export default {
     width: 96px;
     height: 96px;
     border-radius: 50%;
+    overflow: hidden;
     font-size: 0;
     img {
       position: absolute;
