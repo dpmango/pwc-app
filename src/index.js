@@ -12,6 +12,8 @@ for (const name in components) {
 
 bridge.send('VKWebAppInit', {})
 
+bridge.subscribe(e => console.log(e))
+
 new Vue({
   store,
   router,

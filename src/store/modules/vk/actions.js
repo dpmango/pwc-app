@@ -4,7 +4,9 @@ export default {
   async fetchProfile({ commit }) {
     /* получаем данные профиля вк */
     try {
+      console.log('getting profile - VKWebAppGetUserInfo')
       const profile = await bridge.send('VKWebAppGetUserInfo', {})
+      console.log('profile after await', profile)
 
       commit('setProfile', profile)
       return {

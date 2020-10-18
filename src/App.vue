@@ -25,8 +25,8 @@ export default {
     }
   },
   async mounted() {
-    // await this.$store.dispatch('noVkInit')
-    // this.loading = false
+    await this.$store.dispatch('init')
+    this.loading = false
     // this.$store.commit('vk/saveUtm', getUtmFields(this.$route.hash))
   },
 }
