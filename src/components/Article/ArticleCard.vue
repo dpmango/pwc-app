@@ -1,18 +1,20 @@
 <template>
   <div class="ac">
     <div class="ac__head">
-      <div class="ac__title">{{ data.title }}</div>
+      <router-link to="/articles/1" class="ac__title">
+        {{ data.title }}
+      </router-link>
       <div class="ac__datetime" v-if="data.datetime">
         {{ data.datetime }}
       </div>
     </div>
-    <div class="ac__image" v-if="data.image">
+    <router-link to="/articles/1" class="ac__image" v-if="data.image">
       <img
         :src="data.image"
         :srcset="data.image2x ? `${data.image2x} 2x` : null"
         alt=""
       />
-    </div>
+    </router-link>
     <div class="ac__metrics">
       <button class="ac__likes">
         <!-- <SvgIcon name="like-filled" /> -->
@@ -76,6 +78,10 @@ export default {
     font-weight: 700;
     line-height: 22px;
     padding-right: 10px;
+    transition: color 0.25s $ease;
+    &:hover {
+      color: $colorRed;
+    }
   }
   &__datetime {
     flex: 0 0 auto;
@@ -90,6 +96,10 @@ export default {
     font-size: 0;
     img {
       max-width: 100%;
+    }
+    transition: opacity 0.25s $ease;
+    &:hover {
+      opacity: 0.75;
     }
   }
   &__metrics {

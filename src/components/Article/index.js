@@ -1,3 +1,4 @@
 import ArticleCard from './ArticleCard'
+import ArticleContent from './ArticleContent'
 
-export { ArticleCard }
+export { ArticleCard, ArticleContent }
