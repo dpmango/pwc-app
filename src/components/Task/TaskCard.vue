@@ -1,6 +1,11 @@
 <template>
   <div class="task-card" :data-id="data.id">
-    <div class="task-card__label" v-if="data.label">{{ data.label }}</div>
+    <router-link
+      :to="`tasks/${data.id}`"
+      class="task-card__label"
+      v-if="data.label"
+      >{{ data.label }}</router-link
+    >
     <div class="task-card__status" v-if="data.status">{{ data.status }}</div>
     <div class="task-card__wrapper">
       <div class="task-card__content">
@@ -11,9 +16,13 @@
             {{ data.result[1] }} {{ plurizeBall }}.
           </p>
         </div>
-        <div class="task-card__name" v-if="!data.result && data.name">
+        <router-link
+          :to="`tasks/${data.id}`"
+          class="task-card__name"
+          v-if="!data.result && data.name"
+        >
           {{ data.name }}
-        </div>
+        </router-link>
       </div>
       <div class="task-card__image" v-if="data.image">
         <img :src="data.image" :alt="data.name" />
@@ -67,6 +76,11 @@ export default {
     color: rgba($colorGrayLight, 0.56);
     border-radius: 20px;
     border: 1px solid rgba($colorGrayLight, 0.56);
+    transition: 0.25s $ease;
+    &:hover {
+      color: $fontColor;
+      border-color: $fontColor;
+    }
   }
   &__wrapper {
     margin-top: 8px;
@@ -78,9 +92,14 @@ export default {
     padding-right: 8px;
   }
   &__name {
+    display: block;
     font-size: 14px;
     font-weight: 700;
     line-height: 22px;
+    transition: color 0.25s $ease;
+    &:hover {
+      color: $colorRed;
+    }
   }
   &__image {
     flex: 0 0 auto;

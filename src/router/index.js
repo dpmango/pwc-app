@@ -33,6 +33,11 @@ const routes = [
     component: () => import('@/pages/Tasks.vue'),
   },
   {
+    path: '/tasks/:id',
+    name: 'Task',
+    component: () => import('@/pages/Task.vue'),
+  },
+  {
     path: '/pwc',
     name: 'PwC',
     component: () => import('@/pages/PWC.vue'),

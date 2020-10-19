@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .title {
   flex: 0 0 auto;
-  padding: 8px 0;
+  padding: 34px 0 8px;
   &__wrapper {
     display: flex;
     align-items: center;
