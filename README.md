@@ -9,7 +9,7 @@ https://vk.com/app7631008 - CI
 https://m.vk.com/app7631008 - (dev mode, localhost)
 
 ## Dev tools
-В режиме iframe (m.vk.com) vue devtools не работают, нужно запускать в отдельной вкладке терминала `$ vue-devtools` (предварительно установив пакет глобально через -g) и добавив script тег в шапку index.html
+В режиме iframe (m.vk.com) vue devtools не работают, нужно запускать в отдельной вкладке терминала `$ vue-devtools` (предварительно установив пакет глобально `$ npm i -g @vue/devtools`) и добавив script тег в шапку index.html
 
 ## Backend API URL
 https://documenter.getpostman.com/view/6099570/TVCZZWUY#039a195f-66e1-4ad1-bfe4-7ed5d15417ad
@@ -19,3 +19,6 @@ https://ft-pwc-frontend.dline-rhost.ru
 
 ## Backend log
 https://ft-pwc-backend.dline-rhost.ru/telescope/requests
+
+## Backend interface 
+https://ft-pwc-adm.dline-rhost.ru/profiles
