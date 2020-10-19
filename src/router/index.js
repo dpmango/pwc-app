@@ -32,6 +32,11 @@ const routes = [
     name: 'Tasks',
     component: () => import('@/pages/Tasks.vue'),
   },
+  {
+    path: '/pwc',
+    name: 'PwC',
+    component: () => import('@/pages/PWC.vue'),
+  },
 ]
 
 const router = new VueRouter({
