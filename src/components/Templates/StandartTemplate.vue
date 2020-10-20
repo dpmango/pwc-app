@@ -20,8 +20,8 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  // TODO - change to 480px
-  max-width: 375px;
+  height: 100%;
+  max-width: 480px;
   background: white;
   margin: 0 auto;
   &__content {

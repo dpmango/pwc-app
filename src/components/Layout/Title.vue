@@ -5,7 +5,7 @@
         <router-link v-if="to" :to="to" class="title__icon">
           <SvgIcon name="back" />
         </router-link>
-        <a v-else href="#" @click="$router.go(-1)" class="title__icon">
+        <a v-else href="#" @click="handleBackClick" class="title__icon">
           <SvgIcon name="back" />
         </a>
         <div class="title__name">{{ name }}</div>
@@ -22,6 +22,16 @@ export default {
     to: {
       type: String,
       required: false,
+    },
+  },
+  methods: {
+    handleBackClick() {
+      const hasHistory = window.history.length > 2
+      if (hasHistory) {
+        this.$router.go(-1)
+      } else {
+        this.$router.push('/')
+      }
     },
   },
 }

@@ -58,7 +58,7 @@ export default {
     font-size: 0;
     img,
     picture {
-      max-width: 100%;
+      width: 100%;
     }
   }
   &__wysiwyg {

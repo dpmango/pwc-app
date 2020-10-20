@@ -57,7 +57,7 @@ export default {
   z-index: 9;
   background: white;
   width: 100%;
-  max-width: 375px;
+  max-width: 480px;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);

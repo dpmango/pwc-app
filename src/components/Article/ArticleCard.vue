@@ -94,8 +94,9 @@ export default {
   &__image {
     margin: 16px 0;
     font-size: 0;
-    img {
-      max-width: 100%;
+    img,
+    picture {
+      width: 100%;
     }
     transition: opacity 0.25s $ease;
     &:hover {

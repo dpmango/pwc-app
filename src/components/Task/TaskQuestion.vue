@@ -103,7 +103,7 @@ export default {
     img,
     picture {
       margin-top: 16px;
-      max-width: 100%;
+      width: 100%;
     }
   }
   &__list {
