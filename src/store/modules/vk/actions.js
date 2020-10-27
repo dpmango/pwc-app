@@ -25,14 +25,6 @@ export default {
     try {
       const utm = getters.utm
 
-      // Ставим параметры которые передаются приложением vk_
-      if (utm) {
-        this.$http.defaults.params = {}
-        Object.keys(utm).forEach(k => {
-          this.$http.defaults.params[k] = utm[k]
-        })
-      }
-
       let {
         keys: [token],
       } = await bridge.send('VKWebAppStorageGet', { keys: [key] })
@@ -60,7 +52,7 @@ export default {
     }
   },
   async getToken({ dispatch, commit }) {
-    console.log('get token')
+    console.log('TODO - get token')
     // TODO - API не отдает токен
     /* получем токен через /profiles, параметры беруться из axios.defaults */
     try {

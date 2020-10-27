@@ -2,8 +2,7 @@
   <div class="article">
     <Container>
       <h1 class="article__title">
-        PwC – международная сеть компаний, оказывающих услуги в области аудита и
-        консалтинга.
+        {{ article.title }}
       </h1>
       <div class="article__cover">
         <img
@@ -11,36 +10,23 @@
           srcset="/static/articleCover@2x.jpg 2x"
         />
       </div>
-      <div class="article__wysiwyg">
-        <p>
-          PwC предоставляет аудиторские и консультационные услуги, а также
-          услуги в области налогообложения и юридические услуги публичным и
-          частным компаниям разных отраслей. Благодаря опыту, накопленному
-          нашими сотрудниками, объединенному с обширными знаниями специалистов
-          международной сети, мы готовы оказать вам содействие в развитии вашего
-          бизнеса как в России, так и за рубежом.
-        </p>
-        <img
-          src="/static/articleCover.jpg"
-          srcset="/static/articleCover@2x.jpg 2x"
-        />
-        <p>
-          PwC предоставляет аудиторские и консультационные услуги, а также
-          услуги в области налогообложения и юридические услуги публичным и
-          частным компаниям разных отраслей. Благодаря опыту, накопленному
-          нашими сотрудниками, объединенному с обширными знаниями специалистов
-          международной сети, мы готовы оказать вам содействие в развитии вашего
-          бизнеса как в России, так и за рубежом.
-        </p>
-      </div>
+      <div class="article__wysiwyg" v-html="article.body"></div>
     </Container>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'ArticleContent',
   props: {},
+  computed: {
+    article() {
+      return this.publicationById(this.$route.params.id)
+    },
+    ...mapGetters('publications', ['publicationById']),
+  },
 }
 </script>
 

@@ -1,3 +1,4 @@
 import SvgIcon from './SvgIcon'
+import Loader from './Loader'
 
-export { SvgIcon }
+export { SvgIcon, Loader }

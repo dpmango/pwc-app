@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import Vue from 'vue'
 import Vuex from 'vuex'
 // import store from '@/store'
 import * as CONSTS from './constants'
@@ -46,6 +47,7 @@ const http = Axios.create({
 // )
 
 Vuex.Store.prototype.$http = http
+Vue.prototype.$http = http
 
 // if (TOKEN) {
 //   http.defaults.headers['Authorization'] = TOKEN

@@ -24,8 +24,17 @@ export default {
     }
   },
   async mounted() {
-    console.log('App mounted -w.loc', window.location)
-    this.$store.commit('vk/saveUtm', getUtmFields(window.location.search))
+    // console.log('App mounted -w.loc', window.location.search)
+    const utm = getUtmFields(window.location.search)
+    // Ставим параметры которые передаются приложением vk_ в axios
+    if (utm) {
+      this.$http.defaults.params = {}
+      Object.keys(utm).forEach(k => {
+        this.$http.defaults.params[k] = utm[k]
+      })
+    }
+
+    this.$store.commit('vk/saveUtm', utm)
     await this.$store.dispatch('init')
     this.loading = false
   },

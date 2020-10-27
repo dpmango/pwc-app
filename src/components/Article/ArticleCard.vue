@@ -1,11 +1,11 @@
 <template>
-  <div class="ac">
+  <div class="ac" :data-id="data.id">
     <div class="ac__head">
-      <router-link to="/articles/1" class="ac__title">
+      <router-link :to="`/articles/${data.id}`" class="ac__title">
         {{ data.title }}
       </router-link>
-      <div class="ac__datetime" v-if="data.datetime">
-        {{ data.datetime }}
+      <div class="ac__datetime" v-if="data.published_at">
+        {{ dateFormated }}
       </div>
     </div>
     <router-link to="/articles/1" class="ac__image" v-if="data.image">
@@ -19,17 +19,19 @@
       <button class="ac__likes">
         <!-- <SvgIcon name="like-filled" /> -->
         <SvgIcon name="like-outline" />
-        <span>{{ data.likeCount }}</span>
+        <span>{{ data.likes_count }}</span>
       </button>
       <button class="ac__shares">
         <SvgIcon name="share" />
-        <span>{{ data.shareCount }}</span>
+        <span>{{ data.reposts_count }}</span>
       </button>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'ArticleCard',
   props: {
@@ -38,17 +40,27 @@ export default {
         type: String,
         required: true,
       },
-      datetime: String,
+      published_at: Number,
       image: String,
       image2x: String,
-      likeCount: {
+      likes_count: {
         type: Number,
         default: 0,
       },
-      shareCount: {
+      reposts_count: {
         type: Number,
         default: 0,
       },
+    },
+  },
+  computed: {
+    dateFormated() {
+      const m = moment.unix(this.data.published_at)
+      try {
+        return m.format('MM/DD/YY')
+      } catch (e) {
+        return ''
+      }
     },
   },
 }
