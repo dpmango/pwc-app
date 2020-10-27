@@ -7,13 +7,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Task',
   data() {
     return {}
   },
-  mounted() {
-    console.log('route id', this.$route.params.id)
+  created() {
+    this.fetchTest(this.$route.params.id)
+  },
+  methods: {
+    ...mapActions('tests', ['fetchTest']),
   },
 }
 </script>

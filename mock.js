@@ -3,7 +3,17 @@ const testsData = [
     id: 12,
     title: 'Привет',
     questions_order: 'random',
+    test_pictures: [
+      {
+        id: 8,
+        test_id: 15,
+        picture_path:
+          'https://ft-pwc-backend.dline-rhost.ru/storage/tests/15/pictures/tejb8gXLsmOrKoMjYVZIU25cPjocTzR4YKpTRVXk.jpeg',
+        order: 1,
+      },
+    ],
     reply_options: null,
+    test_completed: false,
   },
   {
     id: 15,

@@ -1,21 +1,29 @@
 <template>
-  <div class="task-head">
+  <div class="task-head" v-if="test">
     <Container>
       <div class="task-head__title">
-        Представь, что ты уже миллиардер. Пройди тест и узнай, сможешь ли ты
-        приумножить свое состояние.
+        {{ test.title }}
       </div>
-      <div class="task-head__image">
-        <img src="/static/testIllustration_1.svg" />
+
+      <div class="task-head__image" v-if="test.test_pictures.length">
+        <img :src="test.test_pictures[0].picture_path" :alt="test.title" />
       </div>
     </Container>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'TaskHead',
   props: {},
+  computed: {
+    test() {
+      return this.testById(this.$route.params.id)
+    },
+    ...mapGetters('tests', ['testById']),
+  },
 }
 </script>
 

@@ -1,34 +1,33 @@
 <template>
   <div class="task-card" :data-id="data.id">
-    <router-link
-      :to="`tasks/${data.id}`"
-      class="task-card__label"
-      v-if="data.label"
-      >{{ data.label }}</router-link
-    >
+    <router-link :to="taskRoute" class="task-card__label" v-if="data.label">
+      {{ data.label }}
+    </router-link>
     <div class="task-card__status" v-if="data.status">{{ data.status }}</div>
     <div class="task-card__wrapper">
       <div class="task-card__content">
-        <div class="task-card__result" v-if="data.result">
+        <div class="task-card__result" v-if="data.test_completed">
           <p class="task-card__result-info">Тест пройден.</p>
-          <p class="task-card__result-value">
+          <!-- <p class="task-card__result-value">
             Ты набрал <strong>{{ data.result[0] }}</strong> из
             {{ data.result[1] }} {{ plurizeBall }}.
-          </p>
+          </p> -->
         </div>
         <router-link
-          :to="`tasks/${data.id}`"
+          :to="taskRoute"
           class="task-card__name"
-          v-if="!data.result && data.name"
+          v-if="!data.test_completed && data.title"
         >
-          {{ data.name }}
+          {{ data.title }}
         </router-link>
       </div>
-      <div class="task-card__image" v-if="data.image">
-        <img :src="data.image" :alt="data.name" />
+      <div class="task-card__image" v-if="data.test_pictures.length">
+        <router-link :to="taskRoute">
+          <img :src="data.test_pictures[0].picture_path" :alt="data.title" />
+        </router-link>
       </div>
     </div>
-    <div class="task-card__share" v-if="data.result">
+    <div class="task-card__share" v-if="data.test_completed">
       <a href="#">
         <SvgIcon name="share" />
         <span>Поделиться</span>
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-import { Plurize } from '@/helpers'
+// import { Plurize } from '@/helpers'
 
 export default {
   name: 'TaskCard',
@@ -46,8 +45,10 @@ export default {
     data: {
       id: Number,
       label: String,
-      name: String,
-      image: String,
+      title: String,
+      test_pictures: Array,
+      test_completed: Boolean,
+      status: String,
       result: {
         type: Array[(Number, Number)],
         required: false,
@@ -55,9 +56,12 @@ export default {
     },
   },
   computed: {
-    plurizeBall() {
-      return Plurize(this.data.result[1], 'балл', 'балла', 'баллов')
+    taskRoute() {
+      return `tasks/${this.data.id}`
     },
+    // plurizeBall() {
+    //   return Plurize(this.data.result[1], 'балл', 'балла', 'баллов')
+    // },
   },
 }
 </script>
@@ -103,6 +107,10 @@ export default {
   }
   &__image {
     flex: 0 0 auto;
+    max-width: 100px;
+    img {
+      width: 100%;
+    }
   }
   &__result-info {
     margin: 0;
