@@ -16,12 +16,22 @@
       />
     </router-link>
     <div class="ac__metrics">
-      <button class="ac__likes">
-        <!-- <SvgIcon name="like-filled" /> -->
+      <button
+        type="button"
+        class="ac__likes"
+        :class="{ 'is-active': data.like }"
+        @click="handleLikeClick"
+      >
+        <SvgIcon name="like-filled" />
         <SvgIcon name="like-outline" />
         <span>{{ data.likes_count }}</span>
       </button>
-      <button class="ac__shares">
+      <button
+        type="button"
+        class="ac__shares"
+        :class="{ 'is-active': data.repost }"
+        @click="handleShareClick"
+      >
         <SvgIcon name="share" />
         <span>{{ data.reposts_count }}</span>
       </button>
@@ -30,12 +40,23 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import moment from 'moment'
 
 export default {
   name: 'ArticleCard',
+  data() {
+    return {
+      likePending: false,
+      sharePending: false,
+    }
+  },
   props: {
     data: {
+      id: {
+        type: Number,
+        required: true,
+      },
       title: {
         type: String,
         required: true,
@@ -51,6 +72,8 @@ export default {
         type: Number,
         default: 0,
       },
+      like: Boolean,
+      repost: Boolean,
     },
   },
   computed: {
@@ -62,6 +85,21 @@ export default {
         return ''
       }
     },
+  },
+  methods: {
+    async handleLikeClick() {
+      if (this.likePending) return
+      this.likePending = true
+      await this.likePublication(this.data.id)
+      this.likePending = false
+    },
+    async handleShareClick() {
+      if (this.sharePending) return
+      this.sharePending = true
+      await this.sharePublication(this.data.id)
+      this.sharePending = false
+    },
+    ...mapActions('publications', ['likePublication', 'sharePublication']),
   },
 }
 </script>
@@ -122,6 +160,7 @@ export default {
   }
   &__likes,
   &__shares {
+    position: relative;
     -webkit-appearance: none;
     background: transparent;
     box-shadow: none;
@@ -129,6 +168,10 @@ export default {
     display: inline-flex;
     align-items: center;
     padding: 0;
+    min-height: 22px;
+    cursor: pointer;
+    color: $colorGrayLight;
+    transition: 0.25s $ease;
     span {
       display: inline-block;
       font-family: Avenir;
@@ -139,13 +182,50 @@ export default {
     }
     .svg-icon {
       font-size: 20px;
+      transition: opacity 0.25s $ease, transform 0.25s $ease;
       &--share {
         font-size: 22px;
       }
     }
+    &:hover {
+      color: $fontColor;
+    }
   }
   &__likes {
     margin-right: 24px;
+    .svg-icon {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      transform-origin: center center;
+    }
+    span {
+      padding-left: 22px;
+    }
+    .svg-icon--like-filled {
+      opacity: 0;
+    }
+    .svg-icon--like-outline {
+      opacity: 1;
+    }
+    &.is-active {
+      color: #e0301e;
+      .svg-icon {
+        transform: scale(1.25) translateY(-50%);
+      }
+      .svg-icon--like-filled {
+        opacity: 1;
+      }
+      .svg-icon--like-outline {
+        opacity: 0;
+      }
+    }
+  }
+  &__shares {
+    &.is-active {
+      color: $colorPrimary;
+    }
   }
 }
 </style>
