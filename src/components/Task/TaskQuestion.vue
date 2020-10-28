@@ -1,5 +1,5 @@
 <template>
-  <div class="question">
+  <div class="question" ref="container">
     <Container v-if="question">
       <template v-if="!testDone">
         <div
@@ -43,6 +43,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { ScrollTo, getTop } from '@/helpers'
 
 export default {
   name: 'TaskQuestion',
@@ -79,6 +80,7 @@ export default {
         const nextQuestion = this.test.questions_ids[this.questionIndex + 1]
 
         if (nextQuestion) {
+          ScrollTo(getTop(this.$refs.container))
           this.questionIndex++
         } else {
           this.testDone = true
