@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import 'core-js/es/stable'
+import 'core-js/stable'
 import App from './App'
 import router from '@/router'
 import store from '@/store'
