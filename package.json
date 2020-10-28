@@ -19,6 +19,7 @@
     "lodash": "^4.17.19",
     "moment": "^2.29.1",
     "normalize-scss": "^7.0.1",
+    "regenerator-runtime": "^0.13.7",
     "sass": "^1.26.10",
     "swiper": "^6.3.3",
     "vue": "^2.6.11",
