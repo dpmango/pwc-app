@@ -12,13 +12,6 @@ const store = new Vuex.Store({
       await dispatch('vk/fetchProfile')
       // await dispatch('vk/fetchPersonalCard')
     },
-    // async noVkInit({ dispatch }) {
-    //   dispatch('vk/getToken', {
-    //     vk_user_id: '202119180',
-    //     vk_are_notifications_enabled: '1',
-    //     sign: 'test_sign',
-    //   })
-    // },
   },
   strict: process.env.NODE_ENV !== 'production',
 })

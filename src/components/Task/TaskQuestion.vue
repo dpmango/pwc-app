@@ -1,31 +1,43 @@
 <template>
-  <div class="question" v-if="question">
-    <Container>
-      <div
-        class="question__title"
-        v-if="question.question"
-        v-html="question.question"
-      ></div>
-      <div class="question__list" v-if="question.answer_options">
+  <div class="question">
+    <Container v-if="question">
+      <template v-if="!testDone">
         <div
-          class="question__item"
-          :class="{ 'is-active': activeId === idx }"
-          v-for="(answer, idx) in question.answer_options"
-          :key="idx"
-          @click="() => handleClick(idx)"
-        >
-          <div class="question__item-box">
-            <SvgIcon name="check" />
-          </div>
-          <div class="question__item-content">
-            {{ answer }}
+          class="question__title"
+          v-if="question.question"
+          v-html="question.question"
+        ></div>
+        <div class="question__list" v-if="question.answer_options">
+          <div
+            class="question__item"
+            :class="{ 'is-active': activeId === idx }"
+            v-for="(answer, idx) in question.answer_options"
+            :key="idx"
+            @click="() => handleSelectClick(idx)"
+          >
+            <div class="question__item-box">
+              <SvgIcon name="check" />
+            </div>
+            <div class="question__item-content">
+              {{ answer }}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="question__cta">
-        <a href="#">Следующий вопрос</a>
+        <div class="question__cta" @click="handlePostAnswer" v-if="!testDone">
+          <a href="#" :class="{ 'is-disabled': activeId === null }"
+            >Следующий вопрос</a
+          >
+        </div>
+      </template>
+      <div class="question__cta" v-if="testDone">
+        <p>Тест выполнен. Спасибо</p>
+        <router-link :to="`/tasks`">
+          Вернуться к тестам
+        </router-link>
       </div>
     </Container>
+
+    <Loader v-if="!question" />
   </div>
 </template>
 
@@ -37,6 +49,8 @@ export default {
   data() {
     return {
       activeId: null,
+      questionIndex: 0,
+      testDone: false,
     }
   },
   props: {},
@@ -45,16 +59,34 @@ export default {
       return this.testById(this.$route.params.id)
     },
     question() {
-      return this.test && this.test.questions_ids
-        ? this.questionById(this.test.questions_ids[0])
-        : null
+      if (this.test && this.test.questions_ids) {
+        const firstId = this.test.questions_ids[this.questionIndex]
+
+        return this.questionById(firstId)
+      }
+      return null
     },
     ...mapGetters('tests', ['testById']),
     ...mapGetters('questions', ['questionById']),
   },
   methods: {
-    handleClick(id) {
+    handleSelectClick(id) {
       this.activeId = id
+    },
+    handlePostAnswer() {
+      if (this.activeId !== null) {
+        // TODO - dispatch redux action with answer
+        const nextQuestion = this.test.questions_ids[this.questionIndex + 1]
+
+        if (nextQuestion) {
+          this.questionIndex++
+        } else {
+          this.testDone = true
+          this.questionIndex = 0
+        }
+
+        this.activeId = null
+      }
     },
   },
 }
@@ -154,6 +186,10 @@ export default {
       transition: 0.25s $ease;
       &:hover {
         background: $colorRed;
+      }
+      &.is-disabled {
+        background: $colorGrayLight;
+        pointer-events: none;
       }
     }
   }
