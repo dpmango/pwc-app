@@ -1,71 +1,24 @@
 <template>
-  <div class="question">
+  <div class="question" v-if="question">
     <Container>
-      <div class="question__title">
-        1. Какие действия Вы планируете предпринять или уже предприняли для
-        того, чтобы разбогатеть?
-        <img
-          src="/static/articleCover.jpg"
-          srcset="/static/articleCover@2x.jpg 2x"
-        />
-      </div>
-      <div class="question__list">
+      <div
+        class="question__title"
+        v-if="question.question"
+        v-html="question.question"
+      ></div>
+      <div class="question__list" v-if="question.answer_options">
         <div
           class="question__item"
-          :class="{ 'is-active': activeId === 1 }"
-          @click="() => handleClick(1)"
+          :class="{ 'is-active': activeId === idx }"
+          v-for="(answer, idx) in question.answer_options"
+          :key="idx"
+          @click="() => handleClick(idx)"
         >
           <div class="question__item-box">
             <SvgIcon name="check" />
           </div>
           <div class="question__item-content">
-            <p>Я медленно, но уверенно поднимаюсь по карьерной лестнице</p>
-          </div>
-        </div>
-        <div
-          class="question__item"
-          :class="{ 'is-active': activeId === 2 }"
-          @click="() => handleClick(2)"
-        >
-          <div class="question__item-box">
-            <SvgIcon name="check" />
-          </div>
-          <div class="question__item-content">
-            <img
-              src="/static/articleCover.jpg"
-              srcset="/static/articleCover@2x.jpg 2x"
-            />
-          </div>
-        </div>
-        <div
-          class="question__item"
-          :class="{ 'is-active': activeId === 3 }"
-          @click="() => handleClick(3)"
-        >
-          <div class="question__item-box">
-            <SvgIcon name="check" />
-          </div>
-          <div class="question__item-content">
-            <p>
-              Помимо основной работы у меня есть источники получения пассивного
-              дохода, которые я планирую увеличивать
-            </p>
-          </div>
-        </div>
-        <div
-          class="question__item"
-          :class="{ 'is-active': activeId === 4 }"
-          @click="() => handleClick(4)"
-        >
-          <div class="question__item-box">
-            <SvgIcon name="check" />
-          </div>
-          <div class="question__item-content">
-            <p>Я медленно, но уверенно поднимаюсь по карьерной лестнице</p>
-            <img
-              src="/static/articleCover.jpg"
-              srcset="/static/articleCover@2x.jpg 2x"
-            />
+            {{ answer }}
           </div>
         </div>
       </div>
@@ -77,14 +30,28 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'TaskQuestion',
   data() {
     return {
-      activeId: 1,
+      activeId: null,
     }
   },
   props: {},
+  computed: {
+    test() {
+      return this.testById(this.$route.params.id)
+    },
+    question() {
+      return this.test && this.test.questions_ids
+        ? this.questionById(this.test.questions_ids[0])
+        : null
+    },
+    ...mapGetters('tests', ['testById']),
+    ...mapGetters('questions', ['questionById']),
+  },
   methods: {
     handleClick(id) {
       this.activeId = id
