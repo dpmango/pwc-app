@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Title />
+    <Title back="/feed" />
     <ArticleContent />
   </section>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Title name="Баллы и уровни" />
+    <Title name="Баллы и уровни" back="/profile" />
     <div class="profile-points">
       <Container>
         <ProfileLevel

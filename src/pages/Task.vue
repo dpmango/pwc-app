@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Title />
+    <Title back="/tasks" />
     <TaskHead />
     <TaskQuestion />
   </section>

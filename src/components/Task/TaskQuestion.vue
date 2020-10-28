@@ -10,7 +10,7 @@
         <div class="question__list" v-if="question.answer_options">
           <div
             class="question__item"
-            :class="{ 'is-active': activeId === idx }"
+            :class="{ 'is-active': curAnswer === idx }"
             v-for="(answer, idx) in question.answer_options"
             :key="idx"
             @click="() => handleSelectClick(idx)"
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="question__cta" @click="handlePostAnswer" v-if="!testDone">
-          <a href="#" :class="{ 'is-disabled': activeId === null }"
+          <a href="#" :class="{ 'is-disabled': curAnswer === null }"
             >Следующий вопрос</a
           >
         </div>
@@ -49,8 +49,8 @@ export default {
   name: 'TaskQuestion',
   data() {
     return {
-      activeId: null,
       questionIndex: 0,
+      curAnswer: null,
       testDone: false,
     }
   },
@@ -72,10 +72,10 @@ export default {
   },
   methods: {
     handleSelectClick(id) {
-      this.activeId = id
+      this.curAnswer = id
     },
     handlePostAnswer() {
-      if (this.activeId !== null) {
+      if (this.curAnswer !== null) {
         // TODO - dispatch redux action with answer
         const nextQuestion = this.test.questions_ids[this.questionIndex + 1]
 
@@ -87,7 +87,7 @@ export default {
           this.questionIndex = 0
         }
 
-        this.activeId = null
+        this.curAnswer = null
       }
     },
   },

@@ -2,7 +2,7 @@
   <div class="title">
     <Container>
       <div class="title__wrapper">
-        <router-link v-if="to" :to="to" class="title__icon">
+        <router-link v-if="back" :to="back" class="title__icon">
           <SvgIcon name="back" />
         </router-link>
         <a v-else href="#" @click="handleBackClick" class="title__icon">
@@ -19,7 +19,7 @@ export default {
   name: 'Title',
   props: {
     name: String,
-    to: {
+    back: {
       type: String,
       required: false,
     },
