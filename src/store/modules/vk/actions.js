@@ -1,94 +1,24 @@
 import bridge from '@vkontakte/vk-bridge'
 import { VK_APP_URL } from '../../../http/constants'
 export default {
-  async fetchProfile({ commit }) {
-    /* получаем данные профиля вк */
+  async fetchProfile({ commit, getters, dispatch }) {
+    /* получаем данные профиля вк и отправляем на API */
     try {
       const profile = await bridge.send('VKWebAppGetUserInfo', {})
 
       commit('setProfile', profile)
+
+      dispatch('patchProfile', profile)
+
+      if (getters.utm) {
+        dispatch('patchProfile', getters.utm)
+      }
+
       return {
         data: profile,
       }
     } catch (err) {
       console.error('Error vk/fetchProfile', err)
-    }
-  },
-  async removeToken() {
-    await bridge.send('VKWebAppStorageSet', {
-      key: 'accessToken',
-      value: '',
-    })
-  },
-  async checkToken({ getters, commit, dispatch }, key) {
-    /* проверям токен в vk storage */
-    try {
-      const utm = getters.utm
-
-      let {
-        keys: [token],
-      } = await bridge.send('VKWebAppStorageGet', { keys: [key] })
-
-      if (token.value) {
-        /* сохраняем токен в локальный стейт */
-        commit('setToken', token.value)
-        this.$http.defaults.headers.common['X-PROFILE-ACCESS-TOKEN'] =
-          token.value
-        // this.$router.push('/game')
-      } else {
-        /* если токена нет то получаем его через POST /profiles */
-        token = await dispatch('getToken')
-      }
-
-      if (utm) {
-        dispatch('patchProfile', utm)
-      }
-
-      return {
-        data: token.value,
-      }
-    } catch (err) {
-      console.error('Error vk/checkToken', err)
-    }
-  },
-  async getToken({ dispatch, commit }) {
-    console.log('TODO - get token')
-    // TODO - API не отдает токен
-    /* получем токен через /profiles, параметры беруться из axios.defaults */
-    try {
-      const {
-        data: { access_token: token },
-      } = await this.$http.patch('/profiles')
-
-      /* записываем токен в vk storage */
-      await dispatch('saveToken', { key: 'accessToken', value: token })
-      /* сохраняем токен в локальный стейт */
-      commit('setToken', token)
-
-      this.$http.defaults.headers.common['X-PROFILE-ACCESS-TOKEN'] = token
-
-      return {
-        key: 'token',
-        value: token,
-      }
-    } catch (err) {
-      console.error('Error vk/getToken', err)
-    }
-  },
-  async saveToken(_, { key, value }) {
-    /* запись токена vk storage */
-    try {
-      const saveTokenResult = await bridge.send('VKWebAppStorageSet', {
-        key,
-        value,
-      })
-      console.log(saveTokenResult)
-
-      return {
-        data: saveTokenResult,
-      }
-    } catch (err) {
-      console.error('Error vk/saveToken', err)
     }
   },
   fetchUserPhone() {
@@ -110,9 +40,10 @@ export default {
   async fetchPersonalCard({ commit, dispatch }) {
     /* получение телефона и email авторизованного юзера */
     let personalCard = {}
+
     const { platform } = await bridge.send('VKWebAppGetClientVersion')
 
-    if (platform === 'web') {
+    if (platform === 'web' || platform === 'mobile-web') {
       const { phone } = await dispatch('fetchUserPhone')
       const { email } = await dispatch('fetchUserEmail')
 
@@ -131,8 +62,10 @@ export default {
         personalCard = { phone, email }
       }
     }
-    // this.$router.push('/game')
+
     commit('setPersonalCard', personalCard)
+
+    dispatch('patchProfile', personalCard)
 
     return {
       data: personalCard,

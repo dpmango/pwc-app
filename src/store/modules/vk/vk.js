@@ -16,7 +16,6 @@ const state = {
     timezone: 0,
   },
   personalCard: undefined,
-  pushAllow: undefined,
   token: undefined,
   utm: undefined,
 }

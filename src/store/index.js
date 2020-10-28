@@ -10,7 +10,7 @@ const store = new Vuex.Store({
   actions: {
     async init({ dispatch }) {
       await dispatch('vk/fetchProfile')
-      await dispatch('vk/checkToken', 'accessToken')
+      // await dispatch('vk/fetchPersonalCard')
     },
     // async noVkInit({ dispatch }) {
     //   dispatch('vk/getToken', {
