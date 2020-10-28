@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import 'core-js/es/map'
+import 'core-js/es/set'
 import App from './App'
 import router from '@/router'
 import store from '@/store'
