@@ -45,19 +45,4 @@ export default {
       console.error('Error tests/fetchTest', err)
     }
   },
-  // async likePublication({ commit }, id) {
-  //   /* Обработка лайков */
-  //   try {
-  //     commit('setLikeStatus', {
-  //       id: id,
-  //       status: like,
-  //     })
-
-  //     const {
-  //       data: { like },
-  //     } = await this.$http.post(`/publications/${id}/like`)
-  //   } catch (err) {
-  //     console.error('Error publications/likePublication', err)
-  //   }
-  // },
 }

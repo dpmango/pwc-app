@@ -20,12 +20,17 @@ export default {
     try {
       commit('setLikeStatus', {
         id: id,
-        status: like,
       })
 
       const {
-        data: { like },
+        data: { like, likes_count },
       } = await this.$http.post(`/publications/${id}/like`)
+
+      commit('setLikeStatus', {
+        id: id,
+        status: like,
+        likes_count: likes_count,
+      })
     } catch (err) {
       console.error('Error publications/likePublication', err)
     }
@@ -35,12 +40,17 @@ export default {
     try {
       commit('setShareStatus', {
         id: id,
-        status: repost,
       })
 
       const {
-        data: { repost },
+        data: { repost, reposts_count },
       } = await this.$http.post(`/publications/${id}/repost`)
+
+      commit('setShareStatus', {
+        id: id,
+        status: repost,
+        reposts_count: reposts_count,
+      })
     } catch (err) {
       console.error('Error publications/sharePublication', err)
     }
