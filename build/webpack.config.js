@@ -83,6 +83,15 @@ module.exports = {
       {
         test: /\.(png|woff|woff2|eot|ttf)$/,
         loader: 'url-loader?limit=100000',
+        exclude: path.resolve(__dirname, '../src/static'),
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader?name=./src/static/fonts/name].[ext]',
+          },
+        ],
       },
       {
         test: /\.svg$/,
