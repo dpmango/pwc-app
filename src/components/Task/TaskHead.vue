@@ -1,8 +1,8 @@
 <template>
   <div class="task-head" v-if="test">
     <Container>
-      <div class="task-head__title">
-        {{ test.title }}
+      <div class="task-head__title" v-if="test.description">
+        {{ test.description }}
       </div>
 
       <div class="task-head__image" v-if="test.test_pictures.length">

@@ -26,20 +26,16 @@ export default {
       // fetch questions
       const questions = data.questions_ids
       if (questions) {
-        // TODO - better tpye use type ARRAY in API
-        const ids = questions.substring(1, questions.length - 1).split(',')
-        if (ids.length) {
-          ids.forEach(qid => {
-            dispatch(
-              'questions/fetchQuestion',
-              {
-                id: qid,
-                session_key: data.session_key,
-              },
-              { root: true }
-            )
-          })
-        }
+        questions.forEach(qid => {
+          dispatch(
+            'questions/fetchQuestion',
+            {
+              id: qid,
+              session_key: data.session_key,
+            },
+            { root: true }
+          )
+        })
       }
     } catch (err) {
       console.error('Error tests/fetchTest', err)

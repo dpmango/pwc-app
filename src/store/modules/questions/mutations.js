@@ -1,17 +1,15 @@
 export default {
-  setQuestion: (state, { question, id }) => {
-    const index = state.questions.map(x => x.id).indexOf(id)
-    // TODO -make api return id
-    const questionWithId = { id: parseInt(id), ...question }
+  setQuestion: (state, { question }) => {
+    const index = state.questions.map(x => x.id).indexOf(question.id)
 
     // change or append
     if (index !== -1) {
       // state.questions[index] = questionWithId
-      Object.assign(state.questions, questionWithId)
+      Object.assign(state.questions, question)
     } else {
       state.questions = [
-        ...state.questions.filter(t => t.id !== parseInt(id)),
-        questionWithId,
+        ...state.questions.filter(t => t.id !== parseInt(question.id)),
+        question,
       ]
     }
   },

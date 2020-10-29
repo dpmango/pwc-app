@@ -6,7 +6,7 @@ export default {
       const { data } = await this.$http.get(`/questions/${id}`, {
         params: { session_key: session_key },
       })
-      commit('setQuestion', { question: data, id: id })
+      commit('setQuestion', { question: data })
     } catch (err) {
       console.error('Error tests/fetchQuestion', err)
     }
