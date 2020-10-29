@@ -11,7 +11,7 @@ export default {
       console.error('Error tests/fetchQuestion', err)
     }
   },
-  async postAnswer({ commit }, { qid, aidx, session_key }) {
+  async postAnswer(_, { qid, aidx, session_key }) {
     /* отправляем ответ на id вопроса (qid) с idx ответа (aidx) */
     console.log('postAnswer', qid, aidx)
 

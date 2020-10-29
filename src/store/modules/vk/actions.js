@@ -83,9 +83,14 @@ export default {
       console.error('Error vk/patchProfile', err)
     }
   },
-  async postStory({ dispatch }, { url, token }) {
+  async postStory(_, { url }) {
     try {
-      await bridge.send('VKWebAppShowStoryBox', {
+      if (!url) {
+        url =
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ068-W-91Lvd-CSDKVuYRhPkDZzZaHWdFnRw&usqp=CAU'
+      }
+
+      const res = await bridge.send('VKWebAppShowStoryBox', {
         background_type: 'image',
         url,
         attachment: {
@@ -94,16 +99,37 @@ export default {
           url: `${VK_APP_URL}#utm_source=share`,
         },
       })
-      dispatch(
-        'challenges/post',
-        {
-          action: 'storyPost',
-          token,
-        },
-        { root: true }
-      )
+
+      return res
     } catch (err) {
       console.error('Error vk/postStory', err)
+    }
+  },
+  async shareApp() {
+    try {
+      await bridge.send('VKWebAppShare', {
+        link: `${VK_APP_URL}#utm_source=share`,
+      })
+    } catch (err) {
+      console.error('Error vk/shareApp', err)
+    }
+  },
+  async postOnWall(_, { message, attach }) {
+    try {
+      let options = {}
+      if (message) {
+        options = {
+          message: message,
+          attachments: [],
+        }
+      }
+      if (attach) {
+        options = { ...options, attachments: [attach] }
+      }
+
+      bridge.send('VKWebAppShowWallPostBox', options)
+    } catch (err) {
+      console.error('Error vk/postOnWall', err)
     }
   },
 }

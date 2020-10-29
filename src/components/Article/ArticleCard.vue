@@ -8,9 +8,9 @@
         {{ dateFormated }}
       </div>
     </div>
-    <router-link to="/articles/1" class="ac__image" v-if="data.image">
+    <router-link to="/articles/1" class="ac__image" v-if="data.cover_picture">
       <img
-        :src="data.image"
+        :src="data.cover_picture"
         :srcset="data.image2x ? `${data.image2x} 2x` : null"
         alt=""
       />
@@ -62,7 +62,7 @@ export default {
         required: true,
       },
       published_at: Number,
-      image: String,
+      cover_picture: String,
       image2x: String,
       likes_count: {
         type: Number,
@@ -96,10 +96,28 @@ export default {
     async handleShareClick() {
       if (this.sharePending) return
       this.sharePending = true
-      await this.sharePublication(this.data.id)
+
+      let postPicture = ''
+      const hPicture = this.data.history_picture
+      const cPicture = this.data.cover_picture
+      if (hPicture) {
+        postPicture = hPicture
+      } else if (cPicture) {
+        postPicture = cPicture
+      }
+
+      const bridgeRes = await this.postStory({
+        url: postPicture,
+      })
+
+      if (bridgeRes && bridgeRes.result === true) {
+        await this.sharePublication(this.data.id)
+      }
+
       this.sharePending = false
     },
     ...mapActions('publications', ['likePublication', 'sharePublication']),
+    ...mapActions('vk', ['postStory']),
   },
 }
 </script>

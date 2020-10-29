@@ -8,10 +8,10 @@
       <div class="task-card__content">
         <div class="task-card__result" v-if="data.test_completed">
           <p class="task-card__result-info">Тест пройден.</p>
-          <!-- <p class="task-card__result-value">
-            Ты набрал <strong>{{ data.result[0] }}</strong> из
-            {{ data.result[1] }} {{ plurizeBall }}.
-          </p> -->
+          <p class="task-card__result-value">
+            Ты набрал <strong>{{ data.score }}</strong> из {{ 'Y' }}
+            {{ plurizeBall }}.
+          </p>
         </div>
         <router-link
           :to="taskRoute"
@@ -22,13 +22,18 @@
         </router-link>
       </div>
       <div class="task-card__image" v-if="data.test_pictures.length">
-        <router-link :to="taskRoute">
+        <router-link :to="taskRoute" v-if="!data.test_completed">
           <img :src="data.test_pictures[0].picture_path" :alt="data.title" />
         </router-link>
+        <img
+          v-else
+          :src="data.test_pictures[0].picture_path"
+          :alt="data.title"
+        />
       </div>
     </div>
     <div class="task-card__share" v-if="data.test_completed">
-      <a href="#">
+      <a href="#" @click="handleClickPostStory">
         <SvgIcon name="share" />
         <span>Поделиться</span>
       </a>
@@ -37,7 +42,8 @@
 </template>
 
 <script>
-// import { Plurize } from '@/helpers'
+import { mapActions } from 'vuex'
+import { Plurize } from '@/helpers'
 
 export default {
   name: 'TaskCard',
@@ -59,9 +65,29 @@ export default {
     taskRoute() {
       return `tasks/${this.data.id}`
     },
-    // plurizeBall() {
-    //   return Plurize(this.data.result[1], 'балл', 'балла', 'баллов')
-    // },
+    plurizeBall() {
+      return Plurize(10, 'балл', 'балла', 'баллов')
+    },
+  },
+  methods: {
+    handleClickPostStory() {
+      // story with bg image
+      const pics = this.data.test_pictures
+      this.postStory({
+        url: pics.length ? pics[0].picture_path : undefined,
+      })
+
+      // share dialog
+      // this.shareApp()
+
+      // wall post
+      // this.postOnWall({
+      //   message:
+      //     'Сообщение https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRh9vtXvtS9NMPnAErSKvEy8RtdLD2zV6LZiw&usqp=CAU',
+      //   // attach: 'photo202119180_456239034',
+      // })
+    },
+    ...mapActions('vk', ['postStory', 'shareApp', 'postOnWall']),
   },
 }
 </script>
