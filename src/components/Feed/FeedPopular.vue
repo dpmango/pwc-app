@@ -135,7 +135,6 @@ export default {
     left: 0;
     right: 0;
     padding: 16px 8px;
-    // TODO - check contrast ratio ?
     color: white;
   }
   &__title {

@@ -10,17 +10,15 @@
         <div class="question__list" v-if="question.answer_options">
           <div
             class="question__item"
-            :class="{ 'is-active': curAnswer === idx }"
             v-for="(answer, idx) in question.answer_options"
+            :class="{ 'is-active': curAnswer === idx }"
             :key="idx"
             @click="() => handleSelectClick(idx)"
           >
             <div class="question__item-box">
               <SvgIcon name="check" />
             </div>
-            <div class="question__item-content">
-              {{ answer }}
-            </div>
+            <div class="question__item-content" v-html="answer" />
           </div>
         </div>
         <div class="question__cta" @click="handlePostAnswer" v-if="!testDone">
@@ -42,7 +40,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { ScrollTo, getTop } from '@/helpers'
 
 export default {
@@ -74,9 +72,16 @@ export default {
     handleSelectClick(id) {
       this.curAnswer = id
     },
-    handlePostAnswer() {
+    async handlePostAnswer() {
       if (this.curAnswer !== null) {
-        // TODO - dispatch redux action with answer
+        const aRes = await this.postAnswer({
+          qid: this.question.id,
+          aidx: this.curAnswer.toString(),
+          session_key: this.test.session_key,
+        })
+
+        console.log({ aRes })
+
         const nextQuestion = this.test.questions_ids[this.questionIndex + 1]
 
         if (nextQuestion) {
@@ -90,6 +95,7 @@ export default {
         this.curAnswer = null
       }
     },
+    ...mapActions('questions', ['postAnswer']),
   },
 }
 </script>

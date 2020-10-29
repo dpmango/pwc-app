@@ -11,4 +11,19 @@ export default {
       console.error('Error tests/fetchQuestion', err)
     }
   },
+  async postAnswer({ commit }, { qid, aidx, session_key }) {
+    /* отправляем ответ на id вопроса (qid) с idx ответа (aidx) */
+    console.log('postAnswer', qid, aidx)
+
+    try {
+      const { data } = await this.$http.post(`/questions/${qid}`, {
+        session_key: session_key,
+        answer: aidx,
+      })
+
+      return data
+    } catch (err) {
+      console.error('Error tests/отправляем', err)
+    }
+  },
 }
