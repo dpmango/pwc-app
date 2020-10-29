@@ -10,7 +10,8 @@
     "prettier": "prettier --write src/**/*.js",
     "start": "webpack-dev-server --https --open --config ./build/webpack.dev.conf.js",
     "vuex": "node ./scripts/generateVuexModule.js",
-    "devtools": "vue-devtools"
+    "devtools": "vue-devtools",
+    "deploy": "webpack --config ./build/webpack.prod.conf.js && surge --project ./dist --domain pwc-vk-test.surge.sh"
   },
   "main": "index.js",
   "dependencies": {
@@ -56,6 +57,7 @@
     "prettier": "^1.19.1",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
+    "surge": "^0.21.6",
     "svg-sprite-loader": "^5.0.0",
     "svgo": "^1.1.0",
     "svgo-loader": "^2.1.0",
