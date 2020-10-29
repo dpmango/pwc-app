@@ -6,7 +6,7 @@
           <radial-progress-bar
             :diameter="80"
             :completed-steps="radialProgress"
-            :total-steps="100"
+            :total-steps="scoreCurrentLevel"
             :stroke-width="4"
             :inner-stroke-width="4"
             start-color="#D93954"
@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      userScore: 180,
+      userScore: 210,
       radialTurns: [...Array(12).keys()],
     }
   },
@@ -75,6 +75,9 @@ export default {
     isCurrent() {
       return this.userScore > this.prevScore && this.userScore < this.score
     },
+    scoreCurrentLevel() {
+      return this.score - this.prevScore
+    },
     scoreDiff() {
       return this.score - this.userScore
     },
@@ -84,9 +87,9 @@ export default {
     },
     radialProgress() {
       if (this.isPast) {
-        return 100
+        return this.scoreCurrentLevel
       } else if (this.isCurrent) {
-        return 100 - this.scoreDiff
+        return this.scoreCurrentLevel - this.scoreDiff
       } else {
         return 0
       }

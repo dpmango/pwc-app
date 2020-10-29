@@ -18,11 +18,11 @@
 <script>
 const scoresData = [
   {
-    value: 100,
+    value: 50,
     name: 'Intern',
   },
   {
-    value: 200,
+    value: 150,
     name: 'Associate',
   },
   {
@@ -30,12 +30,20 @@ const scoresData = [
     name: 'Senior Associate',
   },
   {
-    value: 400,
+    value: 500,
     name: 'Manager',
   },
   {
-    value: 500,
+    value: 700,
     name: 'Senior Manager',
+  },
+  {
+    value: 900,
+    name: 'Director',
+  },
+  {
+    value: 1200,
+    name: 'Partner',
   },
 ]
 
