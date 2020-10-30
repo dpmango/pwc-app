@@ -10,7 +10,7 @@ const store = new Vuex.Store({
   actions: {
     async init({ dispatch }) {
       await dispatch('vk/fetchProfile')
-      // await dispatch('vk/fetchPersonalCard')
+      await dispatch('vk/fetchPersonalCard')
     },
   },
   strict: process.env.NODE_ENV !== 'production',
