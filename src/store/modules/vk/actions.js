@@ -45,7 +45,7 @@ export default {
     let phone, email
 
     // проверяем если данные уже есть (не запрашивать дважды)
-    const {
+    let {
       data: { phone: userPhone, email: userEmail },
     } = await this.$http.get('/profiles')
 
@@ -82,6 +82,10 @@ export default {
           personalCard = { phone, email }
         }
       }
+    }
+
+    if (personalCard.phone) {
+      personalCard.phone.replace(/[^0-9]/g, '')
     }
 
     commit('setPersonalCard', personalCard)
