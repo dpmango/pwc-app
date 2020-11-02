@@ -4,13 +4,10 @@
       <h1 class="article__title">
         {{ article.title }}
       </h1>
-      <div class="article__cover">
-        <img
-          src="/static/articleCover.jpg"
-          srcset="/static/articleCover@2x.jpg 2x"
-        />
+      <div class="article__cover" v-if="article.cover_picture">
+        <img :src="article.cover_picture" :alt="article.title" />
       </div>
-      <div class="article__wysiwyg" v-html="article.body"></div>
+      <div class="article__wysiwyg" v-html="bodyContent"></div>
     </Container>
   </div>
 </template>
@@ -24,6 +21,20 @@ export default {
   computed: {
     article() {
       return this.publicationById(this.$route.params.id)
+    },
+    bodyContent() {
+      const tagged = this.article.body.replace(
+        /(\[)(\w+)(\])/g,
+        (match, p1, p2) => {
+          const img = this.article.body_pictures.find(
+            x => x.id === parseInt(p2)
+          )
+
+          return img ? `<img src="${img.picture_path}" />` : ''
+        }
+      )
+
+      return tagged
     },
     ...mapGetters('publications', ['publicationById']),
   },
