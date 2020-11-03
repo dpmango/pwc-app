@@ -3,4 +3,5 @@ export default {
   personalCard: s => s.personalCard,
   token: s => s.token,
   utm: s => s.utm,
+  iframe: s => s.iframe,
 }

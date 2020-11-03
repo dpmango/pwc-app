@@ -21,4 +21,7 @@ export default {
   saveUtm: (state, utm) => {
     state.utm = utm
   },
+  saveIframe: (state, iframe) => {
+    state.iframe = iframe
+  },
 }

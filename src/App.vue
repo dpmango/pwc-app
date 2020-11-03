@@ -25,15 +25,18 @@ export default {
   },
   async mounted() {
     // console.log('App mounted -w.loc', window.location.search)
-    const utm = getUtmFields(window.location.search)
+    const vkFrameFields = getUtmFields(window.location.search)
+    const utm = getUtmFields(window.location.hash)
+
     // Ставим параметры которые передаются приложением vk_ в axios
-    if (utm) {
+    if (vkFrameFields) {
       this.$http.defaults.params = {}
-      Object.keys(utm).forEach(k => {
-        this.$http.defaults.params[k] = utm[k]
+      Object.keys(vkFrameFields).forEach(k => {
+        this.$http.defaults.params[k] = vkFrameFields[k]
       })
     }
 
+    this.$store.commit('vk/saveIframe', vkFrameFields)
     this.$store.commit('vk/saveUtm', utm)
     await this.$store.dispatch('init')
     this.loading = false

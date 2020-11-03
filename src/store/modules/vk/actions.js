@@ -9,9 +9,13 @@ export default {
 
       commit('setProfile', profile)
 
-      const vkfields = getters.utm
-      if (vkfields) {
-        profilePayload = { ...profilePayload, ...vkfields }
+      const iframeFields = getters.iframe
+      const utmFields = getters.utm
+      if (iframeFields) {
+        profilePayload = { ...profilePayload, ...iframeFields }
+      }
+      if (utmFields) {
+        profilePayload = { ...profilePayload, ...utmFields }
       }
 
       dispatch('patchProfile', profilePayload)

@@ -10,6 +10,7 @@
             {{ profile.first_name }} {{ profile.last_name }}
           </div>
           <div class="p-user__level">
+            <!-- 0-49 - Student -->
             <ProfileLevelLabel name="Associate" isActive isVerified />
           </div>
         </div>

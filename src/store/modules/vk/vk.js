@@ -18,6 +18,7 @@ const state = {
   personalCard: undefined,
   token: undefined,
   utm: undefined,
+  iframe: undefined,
 }
 
 export default {
