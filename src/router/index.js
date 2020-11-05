@@ -52,6 +52,11 @@ const routes = [
     name: 'StaticPage',
     component: () => import('@/pages/StaticPage.vue'),
   },
+  {
+    path: '/enable-notifications',
+    name: 'EnableNotification',
+    component: () => import('@/pages/EnableNotification.vue'),
+  },
 ]
 
 const router = new VueRouter({

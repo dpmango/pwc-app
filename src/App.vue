@@ -34,6 +34,11 @@ export default {
       Object.keys(vkFrameFields).forEach(k => {
         this.$http.defaults.params[k] = vkFrameFields[k]
       })
+
+      // проверяем включены ли уведомления
+      if (vkFrameFields.vk_are_notifications_enabled === '0') {
+        this.$router.push('/enable-notifications')
+      }
     }
 
     this.$store.commit('vk/saveIframe', vkFrameFields)

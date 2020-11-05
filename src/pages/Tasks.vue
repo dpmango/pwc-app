@@ -4,6 +4,9 @@
     <button @click="flushProfileResults" class="test-btn">
       Сбросить результаты
     </button>
+    <button @click="disableNotifications" class="test-btn">
+      Отключить уведомления
+    </button>
     <TaskBanner />
 
     <Container v-if="tests">
@@ -24,6 +27,7 @@ export default {
   },
   methods: {
     ...mapActions('tests', ['fetchTests', 'flushProfileResults']),
+    ...mapActions('vk', ['disableNotifications']),
   },
   computed: {
     ...mapGetters('tests', ['tests']),

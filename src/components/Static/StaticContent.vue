@@ -19,7 +19,6 @@ export default {
   },
   computed: {
     bodyContent() {
-      console.log({ content })
       return content[this.name]
     },
   },

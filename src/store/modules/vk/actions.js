@@ -185,4 +185,22 @@ export default {
       console.error('Error vk/postOnWall', err)
     }
   },
+  async enableNotifications() {
+    try {
+      const res = await bridge.send('VKWebAppAllowNotifications')
+
+      return res
+    } catch (err) {
+      console.error('Error vk/enableNotifications', err)
+    }
+  },
+  async disableNotifications() {
+    try {
+      const res = await bridge.send('VKWebAppDenyNotifications')
+
+      return res
+    } catch (err) {
+      console.error('Error vk/enableNotifications', err)
+    }
+  },
 }
