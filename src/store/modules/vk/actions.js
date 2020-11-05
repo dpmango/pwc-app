@@ -43,6 +43,18 @@ export default {
         .finally(() => resolve({}))
     })
   },
+  async fetchPoints({ commit }) {
+    const {
+      data: { points, level },
+    } = await this.$http.get('/profiles')
+
+    commit('setPersonalCard', { level, points })
+
+    return {
+      level,
+      points,
+    }
+  },
   async fetchPersonalCard({ commit, dispatch }) {
     /* получение телефона и email авторизованного юзера */
     let personalCard = {}

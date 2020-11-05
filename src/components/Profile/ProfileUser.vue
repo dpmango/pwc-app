@@ -9,9 +9,8 @@
           <div class="p-user__name">
             {{ profile.first_name }} {{ profile.last_name }}
           </div>
-          <div class="p-user__level">
-            <!-- 0-49 - Student -->
-            <ProfileLevelLabel name="Associate" isActive isVerified />
+          <div class="p-user__level" v-if="personalCard.level">
+            <ProfileLevelLabel :name="personalCard.level" isActive isVerified />
           </div>
         </div>
       </div>
@@ -25,8 +24,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'ProfileUser',
   computed: {
-    // mix the getters into computed with object spread operator
-    ...mapGetters('vk', ['profile']),
+    ...mapGetters('vk', ['profile', 'personalCard']),
   },
 }
 </script>

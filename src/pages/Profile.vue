@@ -16,11 +16,12 @@ export default {
   data() {
     return {}
   },
-  mounted() {
+  created() {
+    this.fetchPoints()
     this.fetchPersonalCard()
   },
   methods: {
-    ...mapActions('vk', ['fetchPersonalCard']),
+    ...mapActions('vk', ['fetchPoints', 'fetchPersonalCard']),
   },
 }
 </script>

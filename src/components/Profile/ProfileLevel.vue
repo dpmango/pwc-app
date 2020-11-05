@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import RadialProgressBar from 'vue-radial-progress'
 import { Plurize } from '@/helpers'
 
@@ -59,7 +60,7 @@ export default {
   },
   data() {
     return {
-      userScore: 210,
+      userScore: this.personalCard ? this.personalCard.points : 0,
       radialTurns: [...Array(12).keys()],
     }
   },
@@ -94,6 +95,7 @@ export default {
         return 0
       }
     },
+    ...mapGetters('vk', ['personalCard']),
   },
 }
 </script>

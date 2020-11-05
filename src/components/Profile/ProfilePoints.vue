@@ -5,7 +5,12 @@
         <div class="p-points__wrapper">
           <div class="p-points__content">
             <div class="p-points__label">ВАШИ БАЛЛЫ</div>
-            <div class="p-points__value">210</div>
+            <div
+              class="p-points__value"
+              v-if="personalCard.points !== undefined"
+            >
+              {{ personalCard.points }}
+            </div>
           </div>
           <div class="p-points__reward">
             <RewardSvg />
@@ -22,12 +27,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import RewardSvg from '@/assets/reward.svg'
 
 export default {
   name: 'ProfilePoints',
   components: {
     RewardSvg,
+  },
+  computed: {
+    ...mapGetters('vk', ['personalCard']),
   },
 }
 </script>

@@ -15,7 +15,12 @@ const state = {
     photo_200: '',
     timezone: 0,
   },
-  personalCard: undefined,
+  personalCard: {
+    email: undefined,
+    level: undefined,
+    phone: undefined,
+    points: undefined,
+  },
   token: undefined,
   utm: undefined,
   iframe: undefined,

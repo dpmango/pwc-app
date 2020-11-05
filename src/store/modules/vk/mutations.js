@@ -3,16 +3,9 @@ export default {
     state.profile = profile
   },
   setPersonalCard: (state, personalCard) => {
-    const { email, phone } = personalCard
-    if (email || phone) {
-      state.personalCard = personalCard
-
-      if (phone) {
-        state.personalCard = {
-          ...personalCard,
-          phone: Number(personalCard.phone.match(/\d/g).join('')),
-        }
-      }
+    state.personalCard = {
+      ...state.personalCard,
+      ...personalCard,
     }
   },
   setToken: (state, token) => {
