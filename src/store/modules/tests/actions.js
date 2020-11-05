@@ -1,3 +1,5 @@
+import shuffle from 'lodash/shuffle'
+
 export default {
   async fetchTests({ commit }) {
     /* получаем тесты пользователя */
@@ -17,13 +19,20 @@ export default {
   },
   async fetchTest({ commit, dispatch }, id) {
     /* получаем тест с конкретным id */
-    console.log('fetchTest -', id)
+    console.log('fetchTest -', parseInt(id))
     try {
-      const { data } = await this.$http.get(`/tests/${id}`)
+      let { data } = await this.$http.get(`/tests/${id}`)
+
+      // randomize (shuffle) questions if needed
+      const qOrder = data.questions_order
+      if (qOrder && qOrder === 'random') {
+        data.questions_ids = shuffle(data.questions_ids)
+      }
 
       commit('setTest', data)
 
-      // fetch questions
+      // fetch questions (order doesnt matter)
+      // TODO - butch possible on backend side ?
       const questions = data.questions_ids
       if (questions) {
         questions.forEach(qid => {
