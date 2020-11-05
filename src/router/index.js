@@ -47,6 +47,11 @@ const routes = [
     name: 'PwC',
     component: () => import('@/pages/PWC.vue'),
   },
+  {
+    path: '/page/:name',
+    name: 'StaticPage',
+    component: () => import('@/pages/StaticPage.vue'),
+  },
 ]
 
 const router = new VueRouter({

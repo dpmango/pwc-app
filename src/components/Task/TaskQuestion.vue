@@ -131,7 +131,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .question {
   margin: 24px 0 24px;
   &__title {

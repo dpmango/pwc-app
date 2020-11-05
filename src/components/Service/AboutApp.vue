@@ -1,7 +1,7 @@
 <template>
   <div class="about-app">
     <Container>
-      <router-link class="about-app__cta-link" to="/app-info">
+      <router-link class="about-app__cta-link" to="/page/info">
         О приложении
       </router-link>
     </Container>
