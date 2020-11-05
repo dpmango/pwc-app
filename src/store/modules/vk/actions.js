@@ -106,7 +106,7 @@ export default {
         personalCard.phone,
         personalCard.phone.replace(/[^0-9]/g, '')
       )
-      personalCard.phone.replace(/[^0-9]/g, '')
+      personalCard.phone = personalCard.phone.replace(/[^0-9]/g, '')
     }
 
     commit('setPersonalCard', personalCard)
