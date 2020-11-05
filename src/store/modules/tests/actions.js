@@ -41,4 +41,8 @@ export default {
       console.error('Error tests/fetchTest', err)
     }
   },
+  async flushProfileResults({ dispatch }) {
+    await this.$http.delete('/profiles/deleteTestsResults')
+    dispatch('fetchTests')
+  },
 }

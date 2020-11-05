@@ -1,6 +1,9 @@
 <template>
   <section>
     <Head />
+    <button @click="flushProfileResults" class="test-btn">
+      Сбросить результаты
+    </button>
     <TaskBanner />
     <div class="task-list">
       <Container v-if="tests">
@@ -20,7 +23,7 @@ export default {
     this.fetchTests()
   },
   methods: {
-    ...mapActions('tests', ['fetchTests']),
+    ...mapActions('tests', ['fetchTests', 'flushProfileResults']),
   },
   computed: {
     ...mapGetters('tests', ['tests']),
@@ -28,4 +31,15 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.test-btn {
+  background: $fontColor;
+  color: white;
+  margin-left: 20px;
+  border-radius: 4px;
+  padding: 4px;
+  border: 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+</style>
