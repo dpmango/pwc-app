@@ -34,7 +34,7 @@
         </router-link>
       </div>
       <div class="navigation__col">
-        <router-link to="/pwc" class="nav-link">
+        <router-link to="/page/pwc" class="nav-link">
           <div class="nav-link__icon">
             <SvgIcon name="note" />
           </div>
