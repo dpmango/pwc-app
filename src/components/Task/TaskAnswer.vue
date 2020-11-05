@@ -144,6 +144,9 @@ export default {
   }
   &__content {
     padding-left: 16px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
     p {
       margin: 0;
       font-size: 12px;

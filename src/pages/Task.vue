@@ -1,7 +1,5 @@
 <template>
   <section>
-    <Title back="/tasks" />
-    <TaskHead />
     <TaskQuestion />
   </section>
 </template>
@@ -15,7 +13,7 @@ export default {
     return {}
   },
   created() {
-    this.fetchTest(this.$route.params.id)
+    this.fetchTest({ id: this.$route.params.id, mode: 'full' })
   },
   methods: {
     ...mapActions('tests', ['fetchTest']),

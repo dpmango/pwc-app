@@ -5,12 +5,11 @@
       Сбросить результаты
     </button>
     <TaskBanner />
-    <div class="task-list">
-      <Container v-if="tests">
-        <TaskCard v-for="(card, idx) in tests" :key="idx" :data="card" />
-      </Container>
-      <Loader v-if="tests.length === 0" />
-    </div>
+
+    <Container v-if="tests">
+      <TaskCard v-for="(card, idx) in tests" :key="idx" :data="card" />
+    </Container>
+    <Loader v-if="tests.length === 0" />
   </section>
 </template>
 

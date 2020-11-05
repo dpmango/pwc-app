@@ -17,15 +17,17 @@ export default {
       console.error('Error tests/fetchTests', err)
     }
   },
-  async fetchTest({ commit, dispatch }, id) {
+  async fetchTest({ commit, dispatch }, { id, mode }) {
     /* получаем тест с конкретным id */
+    /* или делаем запрос на получение обновленного результата (full | score) */
     console.log('fetchTest -', parseInt(id))
+
     try {
       let { data } = await this.$http.get(`/tests/${id}`)
 
       // randomize (shuffle) questions if needed
       const qOrder = data.questions_order
-      if (qOrder && qOrder === 'random') {
+      if (qOrder && qOrder === 'random' && mode === 'full') {
         data.questions_ids = shuffle(data.questions_ids)
       }
 
@@ -34,7 +36,7 @@ export default {
       // fetch questions (order doesnt matter)
       // TODO - butch possible on backend side ?
       const questions = data.questions_ids
-      if (questions) {
+      if (questions && mode === 'full') {
         questions.forEach(qid => {
           dispatch(
             'questions/fetchQuestion',
