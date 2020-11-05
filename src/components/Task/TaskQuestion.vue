@@ -85,6 +85,7 @@ export default {
     handleSelectClick(id) {
       if (this.answerComment === undefined) {
         this.curAnswer = id + 1
+        this.handleNextClick()
       }
     },
     async handleNextClick() {

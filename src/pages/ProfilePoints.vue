@@ -18,6 +18,10 @@
 <script>
 const scoresData = [
   {
+    value: 0,
+    name: 'Student',
+  },
+  {
     value: 50,
     name: 'Intern',
   },

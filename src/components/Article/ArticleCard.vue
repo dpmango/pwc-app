@@ -10,7 +10,7 @@
     </div>
     <router-link to="/articles/1" class="ac__image" v-if="data.cover_picture">
       <img
-        :src="data.cover_picture"
+        :src="data.cover_picture.picture_path"
         :srcset="data.image2x ? `${data.image2x} 2x` : null"
         alt=""
       />
@@ -101,9 +101,9 @@ export default {
       const hPicture = this.data.history_picture
       const cPicture = this.data.cover_picture
       if (hPicture) {
-        postPicture = hPicture
+        postPicture = hPicture.picture_path
       } else if (cPicture) {
-        postPicture = cPicture
+        postPicture = cPicture.picture_path
       }
 
       const bridgeRes = await this.postStory({

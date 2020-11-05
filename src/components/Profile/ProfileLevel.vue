@@ -39,7 +39,7 @@
         <div class="p-label__text">
           <template v-if="isPast">Ты успешно прошел этот уровень</template>
           <template v-else-if="isCurrent">
-            До следующего уровня тебе не хватает {{ scoreLeft }}
+            До следующего уровня тебе не хватает {{ scoreLeftText }}
           </template>
           <template v-else>Этот уровень тебе пока еще недоступен</template>
         </div>
@@ -60,7 +60,6 @@ export default {
   },
   data() {
     return {
-      userScore: this.personalCard ? this.personalCard.points : 0,
       radialTurns: [...Array(12).keys()],
     }
   },
@@ -70,6 +69,9 @@ export default {
     prevScore: Number,
   },
   computed: {
+    userScore() {
+      return this.personalCard ? this.personalCard.points : 0
+    },
     isPast() {
       return this.userScore >= this.score
     },
@@ -82,7 +84,7 @@ export default {
     scoreDiff() {
       return this.score - this.userScore
     },
-    scoreLeft() {
+    scoreLeftText() {
       const plural = Plurize(this.scoreDiff, 'балл', 'балла', 'баллов')
       return `${this.scoreDiff} ${plural}`
     },

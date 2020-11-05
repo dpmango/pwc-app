@@ -5,7 +5,7 @@
         {{ article.title }}
       </h1>
       <div class="article__cover" v-if="article.cover_picture">
-        <img :src="article.cover_picture" :alt="article.title" />
+        <img :src="article.cover_picture.picture_path" :alt="article.title" />
       </div>
       <div class="article__wysiwyg" v-html="bodyContent"></div>
     </Container>
