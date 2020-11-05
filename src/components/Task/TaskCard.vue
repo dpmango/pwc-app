@@ -9,8 +9,8 @@
         <div class="task-card__result" v-if="data.test_completed">
           <p class="task-card__result-info">Тест пройден.</p>
           <p class="task-card__result-value">
-            Ты набрал <strong>{{ data.score }}</strong> из {{ 'Y' }}
-            {{ plurizeBall }}.
+            Ты набрал <strong>{{ data.score }}</strong> из
+            {{ data.max_points }} {{ plurizeBall }}.
           </p>
         </div>
         <router-link
@@ -55,10 +55,8 @@ export default {
       test_pictures: Array,
       test_completed: Boolean,
       status: String,
-      result: {
-        type: Array[(Number, Number)],
-        required: false,
-      },
+      score: Number,
+      max_points: Number,
     },
   },
   computed: {
@@ -66,7 +64,7 @@ export default {
       return `tasks/${this.data.id}`
     },
     plurizeBall() {
-      return Plurize(10, 'балл', 'балла', 'баллов')
+      return Plurize(this.data.max_points, 'балла', 'баллов', 'баллов')
     },
   },
   methods: {
