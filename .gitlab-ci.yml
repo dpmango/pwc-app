@@ -50,3 +50,17 @@ deploy_stage:
     tags:
         - isp
     
+deploy_prod:
+  stage: deploy
+  <<: *base_deploy
+  environment:
+    name: prod
+    url: https://app.pwc.fut.ru
+  only:
+    refs:
+      - master
+  except:
+    changes:
+      - 'README.md'
+  tags:
+    - ft-prod
