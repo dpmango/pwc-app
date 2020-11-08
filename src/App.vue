@@ -1,20 +1,56 @@
 <template>
   <div class="Root">
-    <StandartTemplate>12312312</StandartTemplate>
-    <router-view></router-view>
+    <StandartTemplate>
+      <router-view />
+    </StandartTemplate>
   </div>
 </template>
+
 <script>
-export default {}
+const getUtmFields = hash => {
+  const fields = hash.substr(1, hash.length - 1).split('&')
+  return fields.reduce((acc, field) => {
+    const splitField = field.split('=')
+    acc[splitField[0]] = splitField[1]
+
+    return acc
+  }, {})
+}
+
+export default {
+  data() {
+    return {
+      loading: true,
+    }
+  },
+  async mounted() {
+    // console.log('App mounted -w.loc', window.location.search)
+    const vkFrameFields = getUtmFields(window.location.search)
+    const utm = getUtmFields(window.location.hash)
+
+    // Ставим параметры которые передаются приложением vk_ в axios
+    if (vkFrameFields) {
+      this.$http.defaults.params = {}
+      Object.keys(vkFrameFields).forEach(k => {
+        this.$http.defaults.params[k] = vkFrameFields[k]
+      })
+
+      // проверяем включены ли уведомления
+      if (vkFrameFields.vk_are_notifications_enabled === '0') {
+        this.$router.push('/enable-notifications')
+      }
+    }
+
+    this.$store.commit('vk/saveIframe', vkFrameFields)
+    this.$store.commit('vk/saveUtm', utm)
+    await this.$store.dispatch('init')
+    this.loading = false
+  },
+}
 </script>
+
 <style lang="scss">
-html,
-body {
-  height: 100%;
-  background-color: #c9c9c9;
-}
-.Root {
-  width: 100%;
-  height: 100%;
-}
+@import 'normalize-scss';
+@include normalize();
+@import '@/theme/app.scss';
 </style>

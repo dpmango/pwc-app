@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+// const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 
 module.exports = {
   entry: {
@@ -55,7 +56,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.(css|scss|sass)$/,
         use: [
           'style-loader',
           MiniCssExtractPlugin.loader,
@@ -72,14 +73,62 @@ module.exports = {
           },
           {
             loader: 'sass-loader',
-            options: { sourceMap: true },
+            options: {
+              sourceMap: true,
+              additionalData: `@import "@/theme/utils.scss";`,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf)$/,
+        loader: 'url-loader?limit=100000',
+        exclude: path.resolve(__dirname, '../src/static'),
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader?name=./src/static/fonts/name].[ext]',
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        exclude: path.resolve(__dirname, '../src/assets/icons'),
+        use: ['vue-loader', 'vue-svg-loader'],
+      },
+      {
+        test: /\.svg$/,
+        include: [path.resolve(__dirname, '../src/assets/icons')],
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              // extract: true,
+            },
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                { removeTitle: true },
+                // { convertColors: { shorthex: false } },
+                { convertPathData: true },
+                {
+                  removeAttrs: {
+                    attrs: 'stroke|fill',
+                  },
+                },
+              ],
+            },
           },
         ],
       },
     ],
   },
   resolve: {
-    extensions: ['.vue'],
+    extensions: ['.vue', '.ts', '.js'],
     alias: {
       '@': path.resolve(__dirname, '../src'),
       '~': path.resolve(__dirname, '../src'),
@@ -98,13 +147,13 @@ module.exports = {
       filename: './index.html',
       title: 'Feature Today',
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: `${path.join(__dirname, '../src')}/static/**/*`,
-    //       to: 'assets/static',
-    //     },
-    //   ],
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: `${path.join(__dirname, '../static')}`,
+          to: 'static',
+        },
+      ],
+    }),
   ],
 }

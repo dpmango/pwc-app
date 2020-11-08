@@ -6,23 +6,12 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   namespaced: true,
-  state: {
-    alerts: [],
-  },
-  getters: {
-    alerts(state) {
-      return state.alerts
-    },
-  },
-  mutations: {
-    addAlertMessage(state, alert) {
-      state.alerts.push(alert)
-    },
-    removeAlert(state, alertId) {
-      state.alerts = state.alerts.filter((alert) => alert.id !== alertId)
-    },
-  },
   modules,
+  actions: {
+    async init({ dispatch }) {
+      await dispatch('vk/fetchProfile')
+    },
+  },
   strict: process.env.NODE_ENV !== 'production',
 })
 

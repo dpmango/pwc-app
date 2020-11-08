@@ -1,14 +1,23 @@
+import 'core-js/stable'
+import 'regenerator-runtime'
 import Vue from 'vue'
 import App from './App'
 import router from '@/router'
 import store from '@/store'
 import '@/http'
-import StandartTemplate from './components/templates/StandartTemplate'
+import bridge from '@vkontakte/vk-bridge'
+import * as components from '@/components'
 
-Vue.component('StandartTemplate', StandartTemplate)
+for (const name in components) {
+  Vue.component(name, components[name])
+}
+
+bridge.send('VKWebAppInit', {})
+
+// bridge.subscribe(e => console.log(e))
 
 new Vue({
   store,
   router,
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount('#app')

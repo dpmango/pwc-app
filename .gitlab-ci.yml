@@ -1,0 +1,66 @@
+stages:
+    - build
+    - deploy
+  
+.base_build: &base_build
+    cache:
+        key: npm
+        paths:
+        - node_modules/
+    before_script:
+        - npm install
+    script:
+        - npm run build
+    artifacts:
+        expire_in: 1 month
+        paths:
+        - dist/
+  
+npm_stage:
+    stage: build
+    <<: *base_build
+    only:
+      - dev
+    variables:
+      HOST: $BACKEND_URL
+  
+.base_deploy: &base_deploy
+    script:
+        - sudo rm -Rf $PROJECT_PATH/builds/$CI_PIPELINE_ID
+        - sudo cp -a ./dist $PROJECT_PATH/builds/$CI_PIPELINE_ID
+        - sudo ln -sfn $PROJECT_PATH/builds/$CI_PIPELINE_ID/ $PROJECT_PATH/website
+        - sudo chown -R $OWNER_USER:$OWNER_GROUP $PROJECT_PATH/
+        - sudo chmod -R 777 $PROJECT_PATH/
+        - cd $PROJECT_PATH/builds
+        - shopt -s extglob
+        - rm -rf !("$CI_PIPELINE_ID")
+  
+deploy_stage:
+    stage: deploy
+    <<: *base_deploy
+    environment:
+        name: stage
+        url: https://ft-pwc-frontend.dline-rhost.ru
+    only:
+        refs:
+        - dev
+    except:
+        changes:
+        - 'README.md'
+    tags:
+        - isp
+    
+deploy_prod:
+  stage: deploy
+  <<: *base_deploy
+  environment:
+    name: prod
+    url: https://app.pwc.fut.ru
+  only:
+    refs:
+      - master
+  except:
+    changes:
+      - 'README.md'
+  tags:
+    - ft-prod
