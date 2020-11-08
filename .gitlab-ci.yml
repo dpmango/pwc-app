@@ -23,6 +23,17 @@ npm_stage:
       - dev
     variables:
       HOST: $BACKEND_URL
+
+npm_prod:
+  stage: build
+  <<: *base_build
+  only:
+    - master
+  variables:
+    HOST: $BACKEND_URL
+  environment:
+        name: prod
+
   
 .base_deploy: &base_deploy
     script:
