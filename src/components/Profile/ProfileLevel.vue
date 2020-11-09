@@ -15,14 +15,18 @@
             stroke-linecap="butt"
           >
           </radial-progress-bar>
-          <div class="radial-stripes">
-            <div
-              v-for="step in radialTurns"
-              class="radial-stripes__turn"
-              :key="step"
-              :style="`transform: rotate(${step / radialTurns.length}turn)`"
-            >
-              <div class="radial-stripes__inner"></div>
+          <div class="radial-stripes-wrap">
+            <div class="radial-stripes-wrap__inner">
+              <div class="radial-stripes">
+                <div
+                  v-for="step in radialTurns"
+                  class="radial-stripes__turn"
+                  :key="step"
+                  :style="`transform: rotate(${step / radialTurns.length}turn)`"
+                >
+                  <div class="radial-stripes__inner"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -180,6 +184,20 @@ export default {
     font-weight: 400;
     line-height: 25px;
   }
+}
+
+.radial-stripes-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.radial-stripes-wrap__inner {
+  position: relative;
+  flex: 1 0 auto;
 }
 
 .radial-stripes {
