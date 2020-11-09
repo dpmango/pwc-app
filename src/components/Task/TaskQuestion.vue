@@ -37,7 +37,7 @@
               @click="handleNextClick"
               v-if="!testDone"
             >
-              <a href="#" :class="{ 'is-disabled': curAnswer === null }"
+              <a :class="{ 'is-disabled': curAnswer === null }"
                 >Следующий вопрос</a
               >
             </div>

@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="task-card__share" v-if="data.test_completed">
-      <a href="#" @click="handleClickPostStory">
+      <a @click="handleClickPostStory">
         <SvgIcon name="share" />
         <span>Поделиться</span>
       </a>
