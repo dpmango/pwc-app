@@ -101,11 +101,6 @@ export default {
     }
 
     if (personalCard.phone) {
-      console.log(
-        'Чистим телефон',
-        personalCard.phone,
-        personalCard.phone.replace(/[^0-9]/g, '')
-      )
       personalCard.phone = personalCard.phone.replace(/[^0-9]/g, '')
     }
 

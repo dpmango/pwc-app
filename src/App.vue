@@ -24,7 +24,6 @@ export default {
     }
   },
   async mounted() {
-    // console.log('App mounted -w.loc', window.location.search)
     const vkFrameFields = getUtmFields(window.location.search)
     const utm = getUtmFields(window.location.hash)
 

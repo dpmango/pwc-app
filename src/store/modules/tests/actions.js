@@ -20,7 +20,6 @@ export default {
   async fetchTest({ commit, dispatch }, { id, mode }) {
     /* получаем тест с конкретным id */
     /* или делаем запрос на получение обновленного результата (full | score) */
-    console.log('fetchTest -', parseInt(id))
 
     try {
       let { data } = await this.$http.get(`/tests/${id}`)
@@ -34,7 +33,6 @@ export default {
       commit('setTest', data)
 
       // fetch questions (order doesnt matter)
-      // TODO - butch possible on backend side ?
       const questions = data.questions_ids
       if (questions && mode === 'full') {
         questions.forEach(qid => {
