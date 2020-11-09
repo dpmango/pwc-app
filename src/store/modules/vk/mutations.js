@@ -8,9 +8,6 @@ export default {
       ...personalCard,
     }
   },
-  setToken: (state, token) => {
-    state.token = token
-  },
   saveUtm: (state, utm) => {
     state.utm = utm
   },

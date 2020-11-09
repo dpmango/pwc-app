@@ -4,11 +4,7 @@
       <a href="#" class="ntcheck__btn btn-black" @click="handleYesClick">
         Разрешить
       </a>
-      <router-link
-        class="ntcheck__btn btn-outline"
-        to="/feed"
-        @click="handleNoClick"
-      >
+      <router-link class="ntcheck__btn btn-outline" to="/feed">
         Запретить
       </router-link>
     </Container>
@@ -22,14 +18,10 @@ export default {
   name: 'NotificationEnabler',
   methods: {
     async handleYesClick() {
-      // TODO - request vk api and redirect
       const bridgeRes = await this.enableNotifications()
       if (bridgeRes && bridgeRes.result) {
         this.$router.push('/feed')
       }
-    },
-    handleNoClick() {
-      // save to backend
     },
     ...mapActions('vk', ['enableNotifications']),
   },

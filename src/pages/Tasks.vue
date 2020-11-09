@@ -22,7 +22,6 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Tasks',
   created() {
-    console.log('tasks page - created hook')
     this.fetchTests()
   },
   methods: {

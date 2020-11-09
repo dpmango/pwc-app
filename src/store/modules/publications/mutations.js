@@ -26,7 +26,6 @@ export default {
       article.repost = status
       article.reposts_count = reposts_count
     } else {
-      // TODO - based on api resp - it can't go in minus ?
       article.repost ? article.reposts_count : article.reposts_count++
       article.repost = true
     }

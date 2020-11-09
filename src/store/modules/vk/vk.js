@@ -21,7 +21,6 @@ const state = {
     phone: undefined,
     points: undefined,
   },
-  token: undefined,
   utm: undefined,
   iframe: undefined,
 }
