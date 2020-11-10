@@ -5,7 +5,7 @@
         <router-link v-if="back" :to="back" class="title__icon">
           <SvgIcon name="back" />
         </router-link>
-        <a v-else href="#" @click="handleBackClick" class="title__icon">
+        <a v-else @click="handleBackClick" class="title__icon">
           <SvgIcon name="back" />
         </a>
         <div class="title__name">{{ name }}</div>

@@ -4,7 +4,7 @@
       <div class="f-news__head">новости PwC</div>
       <div class="f-news__grid">
         <div class="f-news__col">
-          <a href="#" target="_blank" class="f-news__card">
+          <a target="_blank" class="f-news__card">
             <div class="f-news__panel">
               <SvgIcon name="education" />
             </div>
@@ -12,7 +12,7 @@
           </a>
         </div>
         <div class="f-news__col">
-          <a href="#" target="_blank" class="f-news__card">
+          <a target="_blank" class="f-news__card">
             <div class="f-news__panel">
               <SvgIcon name="timetable" />
             </div>
@@ -20,7 +20,7 @@
           </a>
         </div>
         <div class="f-news__col">
-          <a href="#" target="_blank" class="f-news__card">
+          <a target="_blank" class="f-news__card">
             <div class="f-news__panel">
               <SvgIcon name="vacancy" />
             </div>

@@ -4,7 +4,7 @@
       <Container>
         <div class="f-popular__head-wrapper">
           <div class="f-popular__title">{{ title }}</div>
-          <a href="#" v-if="!hideMoreLink" class="f-popular__title-link">
+          <a v-if="!hideMoreLink" class="f-popular__title-link">
             <span>Все</span>
             <SvgIcon name="arrow-right" />
           </a>
@@ -76,6 +76,7 @@ export default {
 
 .f-popular {
   padding: 16px 0;
+  max-width: 100%;
   // &__head {
   // }
   &__head-wrapper {
@@ -114,6 +115,11 @@ export default {
   }
   &__content {
     margin-top: 10px;
+    .swiper-container {
+      width: 100vw;
+      max-width: 480px;
+      min-width: 1px;
+    }
     .swiper-slide {
       padding-top: 2px;
       flex: 0 0 125px;

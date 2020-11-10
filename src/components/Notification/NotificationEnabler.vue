@@ -1,7 +1,7 @@
 <template>
   <div class="ntcheck">
     <Container>
-      <a href="#" class="ntcheck__btn btn-black" @click="handleYesClick">
+      <a class="ntcheck__btn btn-black" @click="handleYesClick">
         Разрешить
       </a>
       <router-link class="ntcheck__btn btn-outline" to="/feed">

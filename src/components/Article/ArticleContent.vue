@@ -1,7 +1,7 @@
 <template>
   <div class="article">
     <Container>
-      <h1 class="article__title">
+      <h1 class="article__title" v-if="article.title">
         {{ article.title }}
       </h1>
       <div class="article__cover" v-if="article.cover_picture">

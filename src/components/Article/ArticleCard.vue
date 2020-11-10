@@ -8,7 +8,11 @@
         {{ dateFormated }}
       </div>
     </div>
-    <router-link to="/articles/1" class="ac__image" v-if="data.cover_picture">
+    <router-link
+      :to="`/articles/${data.id}`"
+      class="ac__image"
+      v-if="data.cover_picture"
+    >
       <img
         :src="data.cover_picture.picture_path"
         :srcset="data.image2x ? `${data.image2x} 2x` : null"
