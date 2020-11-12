@@ -1,6 +1,6 @@
 <template>
   <div class="article">
-    <Container>
+    <Container v-if="article">
       <h1 class="article__title" v-if="article.title">
         {{ article.title }}
       </h1>
@@ -9,11 +9,12 @@
       </div>
       <div class="article__wysiwyg" v-html="bodyContent"></div>
     </Container>
+    <Loader v-else />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'ArticleContent',
@@ -37,6 +38,15 @@ export default {
       return tagged
     },
     ...mapGetters('publications', ['publicationById']),
+  },
+  methods: {
+    ...mapActions('publications', ['fetchPublication']),
+  },
+  created() {
+    // handle deeplink open (no feed fetched)
+    if (!this.article) {
+      this.fetchPublication(this.$route.params.id)
+    }
   },
 }
 </script>

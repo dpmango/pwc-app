@@ -2,6 +2,19 @@ export default {
   setPublications: (state, publications) => {
     state.publications = publications
   },
+  setPublication: (state, publication) => {
+    const index = state.publications.map(x => x.id).indexOf(publication.id)
+
+    // change or append
+    if (index !== -1) {
+      Object.assign(state.publications, publication)
+    } else {
+      state.publications = [
+        ...state.publications.filter(t => t.id !== parseInt(publication.id)),
+        publication,
+      ]
+    }
+  },
   setLikeStatus: (state, { id, status, likes_count }) => {
     const article = state.publications.find(a => a.id === parseInt(id))
 
