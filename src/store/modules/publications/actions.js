@@ -15,6 +15,20 @@ export default {
       console.error('Error publications/fetchPublications', err)
     }
   },
+  async fetchPublication({ commit }, id) {
+    /* получаем конкретную публикацию */
+    try {
+      const { data: publication } = await this.$http.get(`/publications/${id}`)
+
+      commit('setPublication', publication)
+
+      return {
+        data: publication,
+      }
+    } catch (err) {
+      console.error('Error publications/fetchPublication', err)
+    }
+  },
   async likePublication({ commit }, id) {
     /* Обработка лайков */
     try {
