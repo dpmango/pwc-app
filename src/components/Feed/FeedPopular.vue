@@ -14,23 +14,20 @@
 
     <div class="f-popular__content">
       <swiper ref="feedSwiper" :options="swiperOptions">
-        <swiper-slide v-for="item in [1, 2, 3, 4, 5, 6]" :key="item">
-          <div class="popular-card">
-            <div class="popular-card__background">
-              <img
-                src="static/f-popular.png"
-                srcset="static/f-popular@2x.png 2x"
-              />
+        <swiper-slide v-for="p in publicationsPinned" :key="p.id">
+          <router-link :to="`/articles/${p.id}`" class="popular-card">
+            <div class="popular-card__background" v-if="p.cover_picture">
+              <img :src="p.cover_picture.picture_path" />
             </div>
             <div class="popular-card__content">
               <div class="popular-card__title">
-                {{ item }} Инвестиции в технологии
+                {{ p.title }}
               </div>
             </div>
             <div class="popular-card__bookmark">
               <SvgIcon name="bookmark" />
             </div>
-          </div>
+          </router-link>
         </swiper-slide>
       </swiper>
     </div>
@@ -38,6 +35,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 
 export default {
@@ -49,6 +47,7 @@ export default {
   data() {
     return {
       swiperOptions: {
+        watchOverflow: true,
         slidesPerView: 'auto',
         spaceBetween: 16,
         slidesOffsetBefore: 24,
@@ -64,6 +63,9 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  computed: {
+    ...mapGetters('publications', ['publicationsPinned']),
   },
   directives: {
     swiper: directive,
@@ -129,10 +131,23 @@ export default {
 }
 
 .popular-card {
+  display: block;
   position: relative;
   z-index: 1;
   &__background {
+    position: relative;
+    z-index: 1;
     font-size: 0;
+    min-height: 160px;
+    img,
+    picture {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   &__content {
     position: absolute;
