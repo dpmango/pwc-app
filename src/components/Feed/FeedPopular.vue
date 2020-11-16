@@ -14,7 +14,14 @@
 
     <div class="f-popular__content">
       <swiper ref="feedSwiper" :options="swiperOptions">
-        <swiper-slide v-for="p in publicationsPinned" :key="p.id">
+        <swiper-slide
+          v-for="p in [
+            ...publicationsPinned,
+            ...publicationsPinned,
+            ...publicationsPinned,
+          ]"
+          :key="p.id"
+        >
           <router-link :to="`/articles/${p.id}`" class="popular-card">
             <div class="popular-card__background" v-if="p.cover_picture">
               <img :src="p.cover_picture.picture_path" />
@@ -132,6 +139,7 @@ export default {
 
 .popular-card {
   display: block;
+  width: 100%;
   position: relative;
   z-index: 1;
   &__background {
