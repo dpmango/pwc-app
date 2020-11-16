@@ -1,5 +1,5 @@
 <template>
-  <div class="f-popular">
+  <div class="f-popular" v-if="publicationsPinned">
     <div class="f-popular__head">
       <Container>
         <div class="f-popular__head-wrapper">
@@ -14,14 +14,7 @@
 
     <div class="f-popular__content">
       <swiper ref="feedSwiper" :options="swiperOptions">
-        <swiper-slide
-          v-for="p in [
-            ...publicationsPinned,
-            ...publicationsPinned,
-            ...publicationsPinned,
-          ]"
-          :key="p.id"
-        >
+        <swiper-slide v-for="p in publicationsPinned" :key="p.id">
           <router-link :to="`/articles/${p.id}`" class="popular-card">
             <div class="popular-card__background" v-if="p.cover_picture">
               <img :src="p.cover_picture.picture_path" />
@@ -59,8 +52,8 @@ export default {
         spaceBetween: 16,
         slidesOffsetBefore: 24,
         slidesOffsetAfter: 24,
-        freeMode: true,
-        freeModeSticky: true,
+        // freeMode: true,
+        // freeModeSticky: true,
       },
     }
   },
