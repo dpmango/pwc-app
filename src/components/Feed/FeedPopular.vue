@@ -4,10 +4,10 @@
       <Container>
         <div class="f-popular__head-wrapper">
           <div class="f-popular__title">{{ title }}</div>
-          <a v-if="!hideMoreLink" class="f-popular__title-link">
+          <!-- <a v-if="!hideMoreLink" class="f-popular__title-link">
             <span>Все</span>
             <SvgIcon name="arrow-right" />
-          </a>
+          </a> -->
         </div>
       </Container>
     </div>

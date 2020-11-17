@@ -1,6 +1,7 @@
 <template>
   <section>
     <Head />
+    <FeedPopular title="Популярное" />
     <ArticleList />
   </section>
 </template>
