@@ -1,30 +1,14 @@
 <template>
-  <div class="f-news">
+  <div class="f-news" v-if="news">
     <Container>
       <div class="f-news__head">новости PwC</div>
       <div class="f-news__grid">
-        <div class="f-news__col">
-          <a target="_blank" class="f-news__card">
+        <div class="f-news__col" v-for="n in news" :key="n.id">
+          <a :href="n.url" target="_blank" class="f-news__card">
             <div class="f-news__panel">
               <SvgIcon name="education" />
             </div>
-            <div class="f-news__name">Стажировка в PwC</div>
-          </a>
-        </div>
-        <div class="f-news__col">
-          <a target="_blank" class="f-news__card">
-            <div class="f-news__panel">
-              <SvgIcon name="timetable" />
-            </div>
-            <div class="f-news__name">Ближайшие мероприятия</div>
-          </a>
-        </div>
-        <div class="f-news__col">
-          <a target="_blank" class="f-news__card">
-            <div class="f-news__panel">
-              <SvgIcon name="vacancy" />
-            </div>
-            <div class="f-news__name">Открытые вакансии в PwC</div>
+            <div class="f-news__name" v-if="n.title">{{ n.title }}</div>
           </a>
         </div>
       </div>
@@ -33,10 +17,17 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'FeedNews',
-  data() {
-    return {}
+  created() {
+    this.fetchNews()
+  },
+  computed: {
+    ...mapGetters('news', ['news']),
+  },
+  methods: {
+    ...mapActions('news', ['fetchNews']),
   },
 }
 </script>
@@ -52,6 +43,7 @@ export default {
   }
   &__grid {
     display: flex;
+    flex-wrap: wrap;
     margin: -8px;
   }
   &__col {
@@ -63,6 +55,11 @@ export default {
     padding: 8px;
   }
   &__card {
+    display: block;
+    transition: 0.25s $ease;
+    &:hover {
+      opacity: 0.75;
+    }
   }
   &__panel {
     padding: 20px 10px;
@@ -75,6 +72,9 @@ export default {
     font-size: 0;
     .svg-icon {
       font-size: 56px;
+    }
+    img {
+      max-width: 100%;
     }
   }
   &__name {

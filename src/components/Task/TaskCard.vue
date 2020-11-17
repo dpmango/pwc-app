@@ -3,7 +3,9 @@
     <router-link :to="taskRoute" class="task-card__label" v-if="data.label">
       {{ data.label }}
     </router-link>
-    <div class="task-card__status" v-if="data.status">{{ data.status }}</div>
+    <div class="task-card__status" v-if="data.reply_option">
+      {{ data.reply_option }}
+    </div>
     <div class="task-card__wrapper">
       <div class="task-card__content">
         <div class="task-card__result" v-if="data.test_completed">
@@ -54,7 +56,7 @@ export default {
       title: String,
       test_pictures: Array,
       test_completed: Boolean,
-      status: String,
+      reply_option: String,
       score: Number,
       max_points: Number,
     },

@@ -1,12 +1,12 @@
 <template>
   <section>
     <Head />
-    <button @click="flushProfileResults" class="test-btn">
+    <!-- <button @click="flushProfileResults" class="test-btn">
       Сбросить результаты
     </button>
     <button @click="disableNotifications" class="test-btn">
       Отключить уведомления
-    </button>
+    </button> -->
     <TaskBanner />
 
     <Container v-if="tests">
