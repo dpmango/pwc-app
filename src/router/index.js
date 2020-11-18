@@ -52,6 +52,11 @@ const routes = [
     name: 'EnableNotification',
     component: () => import('@/pages/EnableNotification.vue'),
   },
+  {
+    path: '/dev',
+    name: 'Dev',
+    component: () => import('@/pages/Dev.vue'),
+  },
 ]
 
 const router = new VueRouter({
