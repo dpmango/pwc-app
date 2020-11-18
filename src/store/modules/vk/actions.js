@@ -139,8 +139,7 @@ export default {
   async postStory(_, { url }) {
     try {
       if (!url) {
-        url =
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ068-W-91Lvd-CSDKVuYRhPkDZzZaHWdFnRw&usqp=CAU'
+        url = 'https://app.pwc.fut.ru/static/strory-default.png'
       }
 
       const res = await bridge.send('VKWebAppShowStoryBox', {
