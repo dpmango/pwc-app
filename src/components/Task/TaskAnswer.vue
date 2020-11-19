@@ -15,6 +15,7 @@
     >
       <div class="answer__box">
         <SvgIcon name="check" />
+        <SvgIcon name="close" />
       </div>
       <div class="answer__content" v-html="content" />
     </div>
@@ -85,9 +86,13 @@ export default {
     }
     .answer__box {
       background: $fontColor;
-      .svg-icon {
+      .svg-icon--check {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
+      }
+      .svg-icon--close {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
       }
     }
   }
@@ -105,6 +110,14 @@ export default {
     }
     .answer__box {
       background: #e0301e;
+      .svg-icon--check {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+      }
+      .svg-icon--close {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
   }
   &:last-child {

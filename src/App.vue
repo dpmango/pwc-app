@@ -62,6 +62,9 @@ export default {
             this.$router.push(`/articles/${split[1]}`)
           }
         }
+        if (u.match('dev')) {
+          this.$router.push(`/dev`)
+        }
         // if (u.match('test')) {
         //   const split = u.split('-')
         //   if (split.length > 1) {

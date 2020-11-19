@@ -7,12 +7,6 @@
     <button @click="disableNotifications" class="test-btn">
       Отключить уведомления
     </button>
-    <TaskBanner />
-
-    <Container v-if="tests">
-      <TaskCard v-for="(card, idx) in tests" :key="idx" :data="card" />
-    </Container>
-    <Loader v-if="tests.length === 0" />
   </section>
 </template>
 
@@ -20,12 +14,9 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'Tasks',
-  created() {
-    this.fetchTests()
-  },
+  name: 'Dev',
   methods: {
-    ...mapActions('tests', ['fetchTests', 'flushProfileResults']),
+    ...mapActions('tests', ['flushProfileResults']),
     ...mapActions('vk', ['disableNotifications']),
   },
   computed: {
