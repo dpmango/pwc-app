@@ -6,7 +6,8 @@
         <div class="f-news__col" v-for="n in news" :key="n.id">
           <a :href="n.url" target="_blank" class="f-news__card">
             <div class="f-news__panel">
-              <SvgIcon name="education" />
+              <img v-if="n.picture_path" :src="n.picture_path" :alt="n.title" />
+              <!-- <SvgIcon name="education" /> -->
             </div>
             <div class="f-news__name" v-if="n.title">{{ n.title }}</div>
           </a>
@@ -62,19 +63,27 @@ export default {
     }
   }
   &__panel {
-    padding: 20px 10px;
-    background: $colorRed;
+    position: relative;
+    z-index: 1;
+    // padding: 20px 10px;
+    // background: $colorRed;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-size: 0;
+    padding-bottom: 100%;
     .svg-icon {
       font-size: 56px;
     }
     img {
-      max-width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
   &__name {

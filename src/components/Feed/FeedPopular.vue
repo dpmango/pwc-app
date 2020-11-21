@@ -16,8 +16,8 @@
       <swiper ref="feedSwiper" :options="swiperOptions">
         <swiper-slide v-for="p in publicationsPinned" :key="p.id">
           <router-link :to="`/articles/${p.id}`" class="popular-card">
-            <div class="popular-card__background" v-if="p.cover_picture">
-              <img :src="p.cover_picture.picture_path" />
+            <div class="popular-card__background" v-if="getPicture(p)">
+              <img :src="getPicture(p)" />
             </div>
             <div class="popular-card__content">
               <div class="popular-card__title">
@@ -66,6 +66,19 @@ export default {
   },
   computed: {
     ...mapGetters('publications', ['publicationsPinned']),
+  },
+  methods: {
+    getPicture(p) {
+      if (p.pin_picture) {
+        return p.pin_picture.picture_path
+      }
+
+      if (p.cover_picture) {
+        return p.cover_picture.picture_path
+      }
+
+      return false
+    },
   },
   directives: {
     swiper: directive,
